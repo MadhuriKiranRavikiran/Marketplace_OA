@@ -9,7 +9,7 @@ using DomainLayer.Interfaces;
 
 namespace RepositoryLayer
 {
-    public class AttributesValueRepo : GenericRepo<AttributeValues>, IAttributesValuesRepo
+    public class AttributesValueRepo : GenericRepo<Attribute_Values>, IAttributesValuesRepo
     {
         public AttributesValueRepo(MarketDBContext context) : base(context)
         {

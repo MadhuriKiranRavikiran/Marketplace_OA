@@ -10,18 +10,12 @@ namespace DomainLayer.Interfaces
     {
 
         IProductsRepo ProductsRepo { get; }
-
         IUsersRepo UsersRepo { get; }
-
-        IMainCategoriesRepo MainCategoriesRepo { get; }
-
         ICategoriesRepo CategoriesRepo { get; }
-
         IAttributesRepo AttributesRepo { get; }
-
-        IAttributeValuesRepo AttributeValuesRepo { get; }
-
-        IProductAttributesRepo AroductAttributesRepo { get; }
+        IAttributesValuesRepo AttributesValueRepo { get; }
+        IProductAttributesRepo ProductAttributesRepo { get; }
+        IMainCategoriesRepo MainCategoriesRepo { get; }
 
 
         int Save();

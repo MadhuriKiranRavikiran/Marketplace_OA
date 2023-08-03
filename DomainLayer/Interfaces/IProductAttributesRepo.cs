@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DomainLayer.Interfaces
 {
 
-    public interface IProductAttributesRepo : IGenericRepo<Product>
+    public interface IProductAttributesRepo : IGenericRepo<Product_Attributes>
     {
 
     }

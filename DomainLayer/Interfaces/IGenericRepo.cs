@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Interfaces
 {
-    public interface IGenericsRepo<TEntity> where TEntity : class
+    public interface IGenericRepo<TEntity> where TEntity : class
     {
         TEntity GetByID(int id);
 

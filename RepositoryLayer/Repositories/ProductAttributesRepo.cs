@@ -9,7 +9,7 @@ using DomainLayer.Interfaces;
 
 namespace RepositoryLayer
 {
-    public class ProductAttributesRepo : GenericRepo<ProductAttributes>, IProductAttributesRepo
+    public class ProductAttributesRepo : GenericRepo<Product_Attributes>, IProductAttributesRepo
     {
         public ProductAttributesRepo(MarketDBContext context) : base(context)
         {
