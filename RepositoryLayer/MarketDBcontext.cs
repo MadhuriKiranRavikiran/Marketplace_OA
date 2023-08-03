@@ -21,13 +21,13 @@ namespace RepositoryLayer
 
         public DbSet<Categories> Categories { get; set; }
 
+        public DbSet<MainCategories> MainCategories { get; set; }
+
         public DbSet<Attributes> Attributes { get; set; }
 
-        public DbSet<AttributesCategory> AttributesCategory { get; set; }
+        public DbSet<Attribute_Values> Attribute_Values { get; set; }
 
-        public DbSet<AttributeValues> AttributeValues { get; set; }
-
-        public DbSet<ProductAttributes> ProductAttributes { get; set; }
+        public DbSet<Product_Attributes> Product_Attributes { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

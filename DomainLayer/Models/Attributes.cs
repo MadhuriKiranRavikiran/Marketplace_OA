@@ -8,12 +8,17 @@ namespace DomainLayer.Models
 {
     public class Attributes
     {
-        public int AttributeID { get; set; }
-        public string AttributeName { get; set; }
-        public float? MinValue { get; set; }
-        public float? MaxValue { get; set; }
-        public string ValueType { get; set; }
+        public int Attribute_ID { get; set; }
+        public string Attribute_Name { get; set; }
+        public Nullable<double> min_value { get; set; }
+        public Nullable<double> max_value { get; set; }
+        public string Value_Type { get; set; }
 
-        public ICollection<ProductAttributes> ProductAttributes { get; set; }
+        
+        public virtual ICollection<Attribute_Values> Attribute_Values { get; set; }
+        
+        public virtual ICollection<Product_Attributes> Product_Attributes { get; set; }
+        
+        public virtual ICollection<Categories> Categories { get; set; }
     }
 }
