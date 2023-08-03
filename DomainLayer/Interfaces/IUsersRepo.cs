@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Interfaces
 {
-    public interface IUsersRepo : IGenericRepo<Customer>
+    public interface IUsersRepo : IGenericRepo<Users>
     {
 
 

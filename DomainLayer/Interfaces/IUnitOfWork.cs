@@ -13,9 +13,9 @@ namespace DomainLayer.Interfaces
         IUsersRepo UsersRepo { get; }
         ICategoriesRepo CategoriesRepo { get; }
         IAttributesRepo AttributesRepo { get; }
-        IAttributesCategoryRepo AttributesCategoryRepo { get; }
-        IAttributeValuesRepo AttributeValuesRepo { get; }
-        IProductAttributesRepo AroductAttributesRepo { get; }
+        IAttributesValuesRepo AttributesValueRepo { get; }
+        IProductAttributesRepo ProductAttributesRepo { get; }
+        IMainCategoriesRepo MainCategoriesRepo { get; }
 
 
         int Save();
