@@ -63,6 +63,7 @@
     <Compile Include="Repositories\ProductsRepo.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepo.cs" />
+    <Compile Include="seed.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
