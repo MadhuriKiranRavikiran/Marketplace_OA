@@ -55,10 +55,10 @@
     <Compile Include="Interfaces\IAttributesService.cs" />
     <Compile Include="Interfaces\IAttributeValuesService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />
-    <Compile Include="Interfaces\IMainCategoriesRepo.cs" />
-    <Compile Include="Interfaces\IProductAttributesRepo.cs" />
-    <Compile Include="Interfaces\IProductsRepo.cs" />
-    <Compile Include="Interfaces\IUsersRepo.cs" />
+    <Compile Include="Interfaces\IMainCategoriesService.cs" />
+    <Compile Include="Interfaces\IProductAttributesService.cs" />
+    <Compile Include="Interfaces\IProductsService.cs" />
+    <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Models\AttributesDTO.cs" />
     <Compile Include="Models\Attribute_ValuesDTO.cs" />
     <Compile Include="Models\CategoriesDTO.cs" />
