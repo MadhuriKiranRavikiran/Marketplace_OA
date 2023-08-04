@@ -14,8 +14,8 @@ namespace ServiceLayer.Models
         public Nullable<double> Min_Continuous_Attribute_Value { get; set; }
         public Nullable<double> Max_Continuous_Attribute_Value { get; set; }
 
-        public virtual Attribute_Values Attribute_Values { get; set; }
-        public virtual Attributes Attributes { get; set; }
-        public virtual Products Products { get; set; }
+        public virtual Attribute_ValuesDTO Attribute_Values { get; set; }
+        public virtual AttributesDTO Attributes { get; set; }
+        public virtual ProductsDTO Products { get; set; }
     }
 }

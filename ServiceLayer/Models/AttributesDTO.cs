@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ServiceLayer.Models
 {
     public class AttributesDTO
@@ -15,10 +16,10 @@ namespace ServiceLayer.Models
         public string Value_Type { get; set; }
 
         
-        public virtual ICollection<Attribute_Values> Attribute_Values { get; set; }
+        public virtual ICollection<Attribute_ValuesDTO> Attribute_Values { get; set; }
         
-        public virtual ICollection<Product_Attributes> Product_Attributes { get; set; }
+        public virtual ICollection<Product_AttributesDTO> Product_Attributes { get; set; }
         
-        public virtual ICollection<Categories> Categories { get; set; }
+        public virtual ICollection<CategoriesDTO> Categories { get; set; }
     }
 }

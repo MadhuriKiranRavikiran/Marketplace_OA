@@ -12,9 +12,9 @@ namespace ServiceLayer.Models
         public Nullable<int> Attribute_ID { get; set; }
         public string Attribute_Value { get; set; }
 
-        public virtual Attributes Attributes { get; set; }
+        public virtual AttributesDTO Attributes { get; set; }
         
-        public virtual ICollection<Product_Attributes> Product_Attributes { get; set; }
+        public virtual ICollection<Product_AttributesDTO> Product_Attributes { get; set; }
     }
 
 }

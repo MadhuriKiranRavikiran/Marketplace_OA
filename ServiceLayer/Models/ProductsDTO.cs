@@ -14,8 +14,8 @@ namespace ServiceLayer.Models
         public string Image_URL { get; set; }
         public Nullable<int> Category_ID { get; set; }
 
-        public virtual Categories Categories { get; set; }
+        public virtual CategoriesDTO Categories { get; set; }
         
-        public virtual ICollection<Product_Attributes> Product_Attributes { get; set; }
+        public virtual ICollection<Product_AttributesDTO> Product_Attributes { get; set; }
     }
 }

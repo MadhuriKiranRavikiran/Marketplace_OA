@@ -7,7 +7,7 @@ using ServiceLayer.Models;
 
 namespace DomainLayer.Interfaces
 {
-    public interface IUsersRepo
+    public interface IUsersService
     {
         IEnumerable<UsersDTO> GetUsers();
 

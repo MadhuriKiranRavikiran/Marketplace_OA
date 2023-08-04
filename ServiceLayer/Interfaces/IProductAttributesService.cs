@@ -8,7 +8,7 @@ using ServiceLayer.Models;
 namespace DomainLayer.Interfaces
 {
 
-    public interface IProductAttributesRepo
+    public interface IProductAttributesService
     {
         IEnumerable<ProductsDTO> GetProductAttributes();
     }
