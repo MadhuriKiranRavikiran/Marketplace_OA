@@ -13,10 +13,10 @@ namespace ServiceLayer.Models
         public Nullable<int> Main_Category_ID { get; set; }
 
 
-        public virtual MainCategories MainCategories { get; set; }
+        public virtual MainCategoriesDTO MainCategories { get; set; }
         
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<ProductsDTO> Products { get; set; }
         
-        public virtual ICollection<Attributes> Attributes { get; set; }
+        public virtual ICollection<AttributesDTO> Attributes { get; set; }
     }
 }
