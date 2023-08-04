@@ -52,6 +52,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Interfaces\IAttributesRepo.cs" />
+    <Compile Include="Interfaces\IAttributeValuesRepo.cs" />
+    <Compile Include="Interfaces\ICategoriesRepo.cs" />
+    <Compile Include="Interfaces\IGenericRepo.cs" />
+    <Compile Include="Interfaces\IMainCategoriesRepo.cs" />
+    <Compile Include="Interfaces\IProductAttributesRepo.cs" />
+    <Compile Include="Interfaces\IProductsRepo.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IUsersRepo.cs" />
+    <Compile Include="Models\AttributesDTO.cs" />
+    <Compile Include="Models\Attribute_ValuesDTO.cs" />
+    <Compile Include="Models\CategoriesDTO.cs" />
+    <Compile Include="Models\MainCategoriesDTO.cs" />
+    <Compile Include="Models\ProductsDTO.cs" />
+    <Compile Include="Models\Product_AttributesDTO.cs" />
+    <Compile Include="Models\UsersDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

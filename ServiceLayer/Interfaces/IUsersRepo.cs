@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServiceLayer.Models;
 
-namespace RepositoryLayer
+namespace DomainLayer.Interfaces
 {
-    public class Class1
+    public interface IUsersRepo
     {
+        IEnumerable<UsersDTO> GetUsers();
+
     }
 }
