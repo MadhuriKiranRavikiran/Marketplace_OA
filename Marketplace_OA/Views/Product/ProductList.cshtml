@@ -1,0 +1,21 @@
+﻿@model Dictionary<string, List<string>>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+
+
+
+@{
+    ViewBag.Title = "Product List";
+}
+
+<h2>Product List for @Model["maincategory"].First() > @Model["subcategory"].First()</h2>
+
+<ul>
+    @foreach (var product in Model["products"])
+    {
+        <li>@product</li>
+    }
+</ul>
+

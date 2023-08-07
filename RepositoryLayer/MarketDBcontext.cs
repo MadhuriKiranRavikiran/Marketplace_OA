@@ -33,7 +33,18 @@ namespace RepositoryLayer
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            // for table Product_Attributes, productsID and AttributesID is composite key
+            modelBuilder.Entity<Product_Attributes>()
+            .HasKey(pa => new { pa.ProductsID, pa.AttributesID });
         }
     }
 }
 
+// How to do Initial Migration 
+
+// 1.Open the Package Manager Console in Visual Studio and run the following command to enable migrations for your project.( select repositoryLayer as default)
+// 2.run the following command  "Enable-Migrations"   to enable migrations
+// 3.Write you code in Configuration.cs to add your data. 
+// 4.Run the following command  "Add-Migration InitialCreate"   to generate an initial migration
+// 5.Run the following command  "Update-Database"  to apply the migration and create the database

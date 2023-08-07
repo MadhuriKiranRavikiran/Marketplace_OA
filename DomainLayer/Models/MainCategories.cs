@@ -8,7 +8,7 @@ namespace DomainLayer.Models
 {
     public class MainCategories
     {
-        public int Main_Category_ID { get; set; }
+        public int MainCategoriesID { get; set; }
         public string Main_Category_Name { get; set; }
 
         public virtual ICollection<Categories> Categories { get; set; }
