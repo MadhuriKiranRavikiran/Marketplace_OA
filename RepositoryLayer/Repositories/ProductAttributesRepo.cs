@@ -14,6 +14,7 @@ namespace RepositoryLayer
         public ProductAttributesRepo(MarketDBContext context) : base(context)
         {
         }
+
     }
 
 }

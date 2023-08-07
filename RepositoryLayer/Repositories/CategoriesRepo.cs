@@ -14,6 +14,8 @@ namespace RepositoryLayer
         public CategoriesRepo(MarketDBContext context) : base(context)
         {
         }
+
+
     }
 
 }

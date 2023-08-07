@@ -14,6 +14,23 @@ namespace RepositoryLayer
         public ProductsRepo(MarketDBContext context) : base(context)
         {
         }
+
+        public class ProductAttributesRepo : GenericRepo<Product_Attributes>, IProductAttributesRepo
+        {
+            public ProductAttributesRepo(MarketDBContext context) : base(context)
+            {
+            }
+
+            public IEnumerable<Products> GetCategoriesByMainCategoryId(int CategoryID)
+            {
+
+                var ProductsList = Context.Set<Categories>()
+                       .Include("Categories")
+                       .SingleOrDefault(mc => mc.Category_ID == CategoryID);
+
+                return ProductsList?.Products;
+            }
+        }
     }
 
 }
