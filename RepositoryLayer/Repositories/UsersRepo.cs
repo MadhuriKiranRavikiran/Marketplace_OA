@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Models;
 using DomainLayer.Interfaces;
+using System.Data.Entity;
+using System.Runtime.Remoting.Contexts;
 
 namespace RepositoryLayer
 {
@@ -13,7 +15,14 @@ namespace RepositoryLayer
     {
         public UsersRepo(MarketDBContext context) : base(context)
         {
-        }
-    }
 
+        }
+        public void AddUser(Users user)
+        {
+
+            Context.Set<Users>().Add(user);
+            Context.SaveChanges();
+        }
+
+    }
 }

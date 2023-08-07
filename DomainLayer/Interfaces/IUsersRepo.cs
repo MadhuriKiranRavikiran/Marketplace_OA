@@ -9,7 +9,7 @@ namespace DomainLayer.Interfaces
 {
     public interface IUsersRepo : IGenericRepo<Users>
     {
-
+        void AddUser(Users user);
 
     }
 }
