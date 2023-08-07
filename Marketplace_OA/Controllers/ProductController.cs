@@ -3,11 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiceLayer;
+using ServiceLayer.Interfaces;
+using Marketplace_OA.Models;
+using AutoMapper;
+using ServiceLayer.Models;
 
 namespace Marketplace_OA.Controllers
 {
     public class ProductController : Controller
     {
+        //code for product details
+        public IProductAttributesService ProductAttributesService;
+        private Mapper mapper;
+
+        public ProductController()
+        {
+            ProductAttributesService = new ProductAttributesService();
+
+            //using automapper 
+            var config = new MapperConfiguration(cfg =>
+            {
+                // Configuring Map
+                cfg.CreateMap<Product_AttributesDTO, ProductAttributesVM>();
+                // Any Other Mapping Configuration ....
+            });
+            // Create an Instance of Mapper and return that Instance
+            mapper = new Mapper(config);
+        }
+
+        public ActionResult ProductDetail()
+        {
+            //Hard code id
+            int id = 2;
+            var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(id));
+
+            return View(productAttribute);
+
+        }
+
+
+
+
         // GET: SearchPage
         public ActionResult Search()
         {

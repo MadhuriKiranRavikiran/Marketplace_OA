@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace ServiceLayer.Models
+namespace Marketplace_OA.Models
 {
-    public class Product_AttributesDTO
+    public class ProductAttributesVM
     {
-
         public int ProductsID { get; set; }
         public int AttributesID { get; set; }
         public string Attribute_Name { get; set; }
