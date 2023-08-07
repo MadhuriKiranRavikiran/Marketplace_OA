@@ -68,6 +68,7 @@
     <Compile Include="Models\ProductsDTO.cs" />
     <Compile Include="Models\Product_AttributesDTO.cs" />
     <Compile Include="Models\UsersDTO.cs" />
+    <Compile Include="MCService.cs" />
     <Compile Include="ProductAttributesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
