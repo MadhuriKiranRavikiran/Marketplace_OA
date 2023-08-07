@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainCategories.cs" />
     <Compile Include="Interfaces\IAttributesService.cs" />
     <Compile Include="Interfaces\IAttributeValuesService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />
@@ -69,6 +68,7 @@
     <Compile Include="Models\ProductsDTO.cs" />
     <Compile Include="Models\Product_AttributesDTO.cs" />
     <Compile Include="Models\UsersDTO.cs" />
+    <Compile Include="ProductAttributesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +76,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
+      <Project>{e29ae642-3347-4a9a-8446-574bb15ffbda}</Project>
+      <Name>DomainLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RepositoryLayer\RepositoryLayer.csproj">
       <Project>{f5aa7fdc-2608-429f-b019-8a0ba184ce16}</Project>
       <Name>RepositoryLayer</Name>

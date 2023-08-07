@@ -18,7 +18,7 @@ namespace RepositoryLayer.Repositories
 
             var MainCategory = Context.Set<MainCategories>()
                    .Include("MainCategories")
-                   .SingleOrDefault(mc => mc.Main_Category_ID == MainCategoryId);
+                   .SingleOrDefault(mc => mc.MainCategoriesID == MainCategoryId);
 
             return MainCategory?.Categories;
         }

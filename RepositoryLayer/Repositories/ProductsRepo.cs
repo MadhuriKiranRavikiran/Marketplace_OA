@@ -26,7 +26,7 @@ namespace RepositoryLayer
 
                 var ProductsList = Context.Set<Categories>()
                        .Include("Categories")
-                       .SingleOrDefault(mc => mc.Category_ID == CategoryID);
+                       .SingleOrDefault(mc => mc.CategoriesID == CategoryID);
 
                 return ProductsList?.Products;
             }
