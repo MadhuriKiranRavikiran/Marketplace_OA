@@ -15,22 +15,22 @@ namespace RepositoryLayer
         {
         }
 
-        public class ProductAttributesRepo : GenericRepo<Product_Attributes>, IProductAttributesRepo
-        {
-            public ProductAttributesRepo(MarketDBContext context) : base(context)
-            {
-            }
+        //public class ProductAttributesRepo : GenericRepo<Product_Attributes>, IProductAttributesRepo
+        //{
+        //    public ProductAttributesRepo(MarketDBContext context) : base(context)
+        //    {
+        //    }
 
-            public IEnumerable<Products> GetCategoriesByMainCategoryId(int CategoryID)
-            {
+        //    public IEnumerable<Products> GetCategoriesByMainCategoryId(int CategoryID)
+        //    {
 
-                var ProductsList = Context.Set<Categories>()
-                       .Include("Categories")
-                       .SingleOrDefault(mc => mc.CategoriesID == CategoryID);
+        //        var ProductsList = Context.Set<Categories>()
+        //               .Include("Categories")
+        //               .SingleOrDefault(mc => mc.CategoriesID == CategoryID);
 
-                return ProductsList?.Products;
-            }
-        }
+        //        return ProductsList?.Products;
+        //    }
+        //}
     }
 
 }
