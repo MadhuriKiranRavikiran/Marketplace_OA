@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Models
+namespace Marketplace_OA.Models
 {
-    public class CategoriesDTO
+    public class CategoriesVM
     {
         public int CategoriesID { get; set; }
         public string Category_Name { get; set; }

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace ServiceLayer.Models
+namespace Marketplace_OA.Models
 {
-    public class MainCategoriesDTO
+    public class MainCategoriesVM
     {
         public int MainCategoriesID { get; set; }
         public string Main_Category_Name { get; set; }
 
-        public virtual ICollection<CategoriesDTO> Categories { get; set; }
+        public virtual ICollection<CategoriesVM> Categories { get; set; }
     }
+   
 }

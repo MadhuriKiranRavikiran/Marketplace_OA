@@ -9,6 +9,6 @@ namespace DomainLayer.Interfaces
 {
     public interface IMainCategoriesRepo : IGenericRepo<MainCategories>
     {
-        IEnumerable<Categories> GetCategoriesByMainCategoryId(int mainCategoryId);
+        
     }
 }

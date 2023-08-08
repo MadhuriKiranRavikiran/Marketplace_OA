@@ -10,7 +10,8 @@ namespace ServiceLayer.Interfaces
 
     public interface ICategoriesService
     {
-        IEnumerable<CategoriesDTO> GetCategory();
+        //IEnumerable<CategoriesDTO> GetCategory();
+        IEnumerable<CategoriesDTO> GetCategoryById(int MainCategoryId);
     }
 
 }

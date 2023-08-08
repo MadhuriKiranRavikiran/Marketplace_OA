@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Models;
 using DomainLayer.Interfaces;
+using System.Runtime.Remoting.Contexts;
 
 namespace RepositoryLayer
 {
@@ -14,23 +15,20 @@ namespace RepositoryLayer
         public ProductsRepo(MarketDBContext context) : base(context)
         {
         }
+        public IEnumerable<Products> GetProductsByCategory(int CategoryId)
+        {
 
-        //public class ProductAttributesRepo : GenericRepo<Product_Attributes>, IProductAttributesRepo
-        //{
-        //    public ProductAttributesRepo(MarketDBContext context) : base(context)
-        //    {
-        //    }
+            var ProductsList = Context.Set<Products>().Where(category => category.CategoriesID == CategoryId);
 
-        //    public IEnumerable<Products> GetCategoriesByMainCategoryId(int CategoryID)
-        //    {
+            // For testing purposes
+            //foreach(var product in ProductsList)
+            //{
+            //    Console.WriteLine(product);
+            //}
 
-        //        var ProductsList = Context.Set<Categories>()
-        //               .Include("Categories")
-        //               .SingleOrDefault(mc => mc.CategoriesID == CategoryID);
-
-        //        return ProductsList?.Products;
-        //    }
-        //}
+            return ProductsList;
+        }
+        
     }
 
 }
