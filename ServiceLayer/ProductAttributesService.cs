@@ -49,7 +49,8 @@ namespace ServiceLayer
                 AttributesID = productAttribute.AttributesID,
                 Attribute_Name = productAttribute.Attributes.Attribute_Name,
                 Attribute_Value_ID = productAttribute.Discrete_Attribute_Value_ID,
-                Attribute_Value = productAttribute.Attribute_Values.Attribute_Value
+                Attribute_Value = productAttribute.Attribute_Values.Attribute_Value,
+                Value_Type = productAttribute.Attributes.Value_Type
             });
 
             return productDetail;
