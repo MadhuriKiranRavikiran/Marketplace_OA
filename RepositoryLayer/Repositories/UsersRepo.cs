@@ -13,7 +13,16 @@ namespace RepositoryLayer
     {
         public UsersRepo(MarketDBContext context) : base(context)
         {
+
         }
+
+        public void AddUser(Users user)
+        {
+
+            Context.Set<Users>().Add(user);
+            Context.SaveChanges();
+        }
+
     }
 
 }

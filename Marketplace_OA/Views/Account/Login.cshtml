@@ -1,4 +1,6 @@
-﻿@{
+﻿@model DomainLayer.Models.Users
+
+@{
     ViewBag.Title = "Login";
 }
 
@@ -8,9 +10,7 @@
     <title>@ViewBag.Title</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #72A0C1, #ffffff);
+            background: linear-gradient(to bottom, #72A0C1, #ffffff) center center fixed;
             font-family: Arial, sans-serif;
         }
 
@@ -20,8 +20,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            max-width: 800px; /* Set a maximum width for the container */
-            margin: 0 auto; /* Center the container horizontally */
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -37,7 +37,6 @@
             background-color: #191970;
             display: inline-block;
             margin: -30px -10px 0 -10px;
-            ;
         }
 
         .light-circle {
@@ -47,7 +46,6 @@
             background-color: #0077c0;
             display: inline-block;
             margin: 0 -10px 0 0px;
-            ;
         }
 
         .company-name {
@@ -77,6 +75,7 @@
             height: 500px;
             max-width: 800px;
             width: 100%;
+            /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/ /*change 1*/
         }
 
         .input-group {
@@ -88,6 +87,7 @@
             .input-group label {
                 font-weight: bold;
                 display: none;
+                text-align: right;
             }
 
             .input-group input {
@@ -97,6 +97,7 @@
                 width: 100%;
                 margin-top: 5px;
                 transition: background-color 0.3s ease;
+                text-align: center;
             }
 
                 .input-group input:hover {
@@ -115,6 +116,9 @@
             margin-top: 10px;
             margin-top: 20px;
             margin-left: auto;
+            /*            margin-top: 20px; /*change 2*/
+            margin-left: auto;
+            float: right;
         }
 
         .signup-link {
@@ -125,12 +129,320 @@
             margin-top: 20px;
             cursor: pointer;
         }
+
+        .gradient-background {
+            display: none;
+        }
+
+        .modal {
+            margin: 0 auto;
+            display: none;
+            position: fixed;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: transparent;
+            background: transparent;
+            justify-content: center;
+        }
+
+        .modal-content {
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: none;
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+
+        .square-card-container {
+            width: 100%;
+            height: 50%;
+            max-width: 600px;
+            margin: 10px auto;
+            position: relative;
+            border-radius: 0%;
+            box-shadow: none;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gradient-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            border-radius: 0;
+            background: linear-gradient(#6DADDB, #313131);
+            pointer-events: none;
+        }
+
+        .square-card {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            color: #000;
+            border: none;
+            border-radius: 0px;
+            padding: 2px;
+        }
+
+
+            .square-card .card-header {
+                background-color: transparent;
+                border-bottom: 1px solid #ccc;
+                text-align: left;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+            }
+
+
+
+            .square-card .card-footer {
+                background-color: transparent;
+                text-align: right;
+                margin-top: 10px;
+                border-top: 1px solid #ccc;
+                border-bottom: none;
+                border-left: none;
+                border-right: none;
+                margin-bottom: 0;
+                padding: 0;
+                height: auto;
+                position: relative;
+            }
+
+
+            .square-card .card-body {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+            }
+
+        .form-group {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .btn-signup {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 1px;
+        }
+
+        .btn-signup-line {
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
+
+        label {
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 5px;
+            width: 150px;
+        }
+
+        .form-field {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circular-image-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .image-preview-text {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .profile-pic-text {
+            font-weight: bold;
+            font-size: 14px;
+            margin: 5px auto;
+        }
+
+        .choose-file-text {
+            font-size: 14px;
+        }
+
+        #preview {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .close-button {
+            background-color: #f2f2f2;
+            color: #808080;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            float: right;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
+            outline: none;
+            margin: 5px;
+        }
+
+            .close-button:hover {
+                background-color: #dcdcdc;
+            }
+
+        .file-input {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
     @{Layout = null;}
 </head>
 <body>
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="square-card-container">
+                <div class="gradient-background"></div>
+                <div class="square-card card">
+                    <div class="card-header" style="font-weight:bold">
+                        Register as User
+                        <button type="button" class="close-button" onclick="closeRegisterPage()">&times;</button>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group" style="text-align:center;">
+                                <div class="image-preview-text">Image Preview</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <div class="circular-image-placeholder">
+                                        <!-- The image preview will be shown here -->
+                                        <img id="preview" src="" alt="" style="align-content: baseline; max-width: 100px; max-height: 100px;" />
+                                        @*@Html.ValidationMessageFor(m => m.ImagePreview, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <div class="profile-pic-text">Your Profile Pic</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="text-align: center;">
+                                <div class="form-field">
+                                    <input type="file" name="ImagePreview" class="file-input" onchange="previewImage(event)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-field">
+                                    @Html.Label("Username:")
+                                    @Html.TextBoxFor(m => m.User_Name, new { @class = "form-control", placeholder = "User Name", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.User_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-field">
+                                    @Html.Label("Email Address:")
+                                    @Html.TextBoxFor(m => m.User_Email, new { @class = "form-control", placeholder = "Email Id", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.User_Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-field">
+                                    @Html.Label("Password:")
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-field">
+                                    @Html.Label("Confirm Password:")
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Password", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn-signup" style="margin-top: 5px;">
+                                    Sign Up
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <a href="/signup" class="signup-link">Sign Up</a>
+
+        <a href="javascript:void(0);" class="signup-link" onclick="openSignupModal()">Sign Up</a>
+
+        @*<a href="/signup" class="signup-link">Sign Up</a>*@
+
         <div class="logo">
             <h1 class="company-name" style="margin: 0 -20px;">
                 j
@@ -152,6 +464,44 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function openSignupModal() {
+            // Show the signup modal
+            document.getElementById("signupModal").style.display = "block";
+        }
+
+        function closeSignupModal() {
+            // Hide the signup modal
+            document.getElementById("signupModal").style.display = "none";
+        }
+
+        function previewImage(event) {
+            var image = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById('preview').src = reader.result;
+            }
+            if (image) {
+                reader.readAsDataURL(image);
+            }
+            /* reader.readAsDataURL(image);*/
+        }
+
+        function closeRegisterPage() {
+            document.getElementById("signupModal").style.display = "none";
+        }
+        function previewImage(event) {
+            var image = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById('preview').src = reader.result;
+            }
+            reader.readAsDataURL(image);
+            document.getElementById('preview').style.maxWidth = '100px';
+            document.getElementById('preview').style.maxHeight = '100px';
+        }
+    </script>
+
 </body>
 </html>
-

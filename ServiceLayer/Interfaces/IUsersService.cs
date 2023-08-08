@@ -10,6 +10,9 @@ namespace DomainLayer.Interfaces
     public interface IUsersService
     {
         IEnumerable<UsersDTO> GetUsers();
+        void RegisterUser(UsersDTO userDto);
+        //void AddUser(UsersDTO userDto);
+
 
     }
 }
