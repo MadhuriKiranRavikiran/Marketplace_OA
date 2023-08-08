@@ -60,6 +60,7 @@
     <Compile Include="Repositories\GenericRepo.cs" />
     <Compile Include="Repositories\MainCategoriesRepo.cs" />
     <Compile Include="Repositories\ProductAttributesRepo.cs" />
+    <Compile Include="Repositories\ProductAttributesRepo2.cs" />
     <Compile Include="Repositories\ProductsRepo.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepo.cs" />

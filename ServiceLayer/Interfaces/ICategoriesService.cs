@@ -12,6 +12,9 @@ namespace ServiceLayer.Interfaces
     {
         //IEnumerable<CategoriesDTO> GetCategory();
         IEnumerable<CategoriesDTO> GetCategoryById(int MainCategoryId);
+       
+
+
     }
 
 }

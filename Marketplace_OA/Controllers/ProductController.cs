@@ -35,7 +35,7 @@ namespace Marketplace_OA.Controllers
         public ActionResult ProductDetail()
         {
             //Hard code id
-            int id = 2;
+            int id = 1001;
             var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(id));
 
             return View(productAttribute);

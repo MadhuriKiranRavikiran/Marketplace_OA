@@ -34,13 +34,14 @@ namespace RepositoryLayer
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-           // for table Product_Attributes, productsID and AttributesID is composite key modelBuilder.Entity<Product_Attributes>()
-           //.HasKey(pa => new { pa.ProductsID, pa.AttributesID });
+            //for table Product_Attributes, productsID and AttributesID is composite key modelBuilder.
+            modelBuilder.Entity<Product_Attributes>()
+        .HasKey(pa => new { pa.ProductsID, pa.AttributesID });
 
-           // modelBuilder.Entity<Product_Attributes>()
-           // .HasOptional(pa => pa.Attribute_Values)
-           // .WithMany(av => av.Product_Attributes)
-           // .HasForeignKey(pa => pa.Discrete_Attribute_Value_ID);
+            modelBuilder.Entity<Product_Attributes>()
+            .HasOptional(pa => pa.Attribute_Values)
+            .WithMany(av => av.Product_Attributes)
+            .HasForeignKey(pa => pa.Discrete_Attribute_Value_ID);
         }
     }
 }

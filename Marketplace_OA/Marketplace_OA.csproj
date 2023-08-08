@@ -141,6 +141,7 @@
     <Compile Include="Models\Attribute_ValuesVM.cs" />
     <Compile Include="Models\CategoriesVM.cs" />
     <Compile Include="Models\MainCategoriesVM.cs" />
+    <Compile Include="Models\ProductAttributeDetailVM.cs" />
     <Compile Include="Models\ProductAttributesVM.cs" />
     <Compile Include="Models\ProductsVM.cs" />
     <Compile Include="Models\Product_AttributesVM.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Views\Home\GetProducts.cshtml" />
     <Content Include="Views\Home\GetProductsById.cshtml" />
     <Content Include="Views\Home\MainCategories.cshtml" />
+    <Content Include="Views\Home\GetProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,7 +13,7 @@ using ServiceLayer.Models;
 
 namespace ServiceLayer
 {
-    public class MCService : IMainCategoriesService, ICategoriesService
+    public class MCService : IMainCategoriesService, ICategoriesService, IProductGetAttributeService
 
     {
         private readonly MarketDBContext context;
@@ -63,11 +63,11 @@ namespace ServiceLayer
             List<CategoriesDTO> categoriesDTO = new List<CategoriesDTO>();
             foreach (var category in categories)
             {
-                  categoriesDTO.Add(new CategoriesDTO
-                  {
+                categoriesDTO.Add(new CategoriesDTO
+                {
                     CategoriesID = category.CategoriesID,
                     Category_Name = category.Category_Name,
-                    MainCategoriesID = category.MainCategoriesID,   
+                    MainCategoriesID = category.MainCategoriesID,
                 });
             }
             return categoriesDTO;
@@ -75,8 +75,29 @@ namespace ServiceLayer
             //return mapper.Map<List<CategoriesDTO>>(categories);
         }
 
-       
-        
+
+        IEnumerable<ProductAttributeDetailDTO> IProductGetAttributeService.GetProductById(int ProductID)
+        {
+            var productAttributeDetail = _unitOfWork.ProductsAttributesRepo.GetProductAttributeByID2(ProductID);
+            List<ProductAttributeDetailDTO> productAttributeDetailDTO = new List<ProductAttributeDetailDTO>();
+            foreach(var item in productAttributeDetail)
+            {
+                productAttributeDetailDTO.Add(new ProductAttributeDetailDTO
+                {
+                    ProductsID = item.ProductsID,
+                    Product_Name = item.Product_Name,
+                    Description = item.Description,
+                    CategoriesID = item.CategoriesID,
+                    AttributesID = item.AttributesID,
+                    Attribute_Name = item.Attribute_Name,
+                    Attribute_Value = item.Attribute_Value,
+
+                });
+            }
+            return productAttributeDetailDTO;
+
+        }
+
 
         public IEnumerable<Products> GetProductsByCategory(int CategoryId)
         {
@@ -87,6 +108,8 @@ namespace ServiceLayer
 
         
     }
+        
+    }
 
  
-}
+

@@ -15,6 +15,12 @@ namespace RepositoryLayer
         public ProductsRepo(MarketDBContext context) : base(context)
         {
         }
+
+        public IEnumerable<ProductAttributeDetail> GetProductAttributeByID(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Products> GetProductsByCategory(int CategoryId)
         {
 

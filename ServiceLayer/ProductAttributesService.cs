@@ -36,7 +36,9 @@ namespace ServiceLayer
         {
 
 
-           // Mapping Product to ProductDTO using AutoMapper
+            // Mapping Product to ProductDTO using AutoMapper
+
+            //var productAttributes = mapper.Map<List<Product_AttributesDTO>>(_unitOfWork.ProductAttributesRepo.GetProductAttributeByID(ProductID));
 
             IEnumerable<Product_Attributes> productAttributes = _unitOfWork.ProductAttributesRepo.GetProductAttributeByID(ProductID);
             IEnumerable<Product_AttributesDTO> productDetail = productAttributes
@@ -47,12 +49,11 @@ namespace ServiceLayer
                 AttributesID = productAttribute.AttributesID,
                 Attribute_Name = productAttribute.Attributes.Attribute_Name,
                 Attribute_Value_ID = productAttribute.Discrete_Attribute_Value_ID,
-                Attribute_Value = productAttribute.Attribute_Values.Attribute_Value
+                Attribute_Value = productAttribute.Attribute_Values.Attribute_Value,
+                Value_Type = productAttribute.Attributes.Value_Type
             });
 
             return productDetail;
-
-
 
 
         }

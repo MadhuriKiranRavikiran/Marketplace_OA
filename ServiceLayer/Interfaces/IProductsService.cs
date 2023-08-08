@@ -13,6 +13,7 @@ namespace ServiceLayer.Interfaces
     {
         IEnumerable<Products> GetProductsByCategory(int CategoryId);
         IEnumerable<Products> GetProductById(int MainCategoryId);
+        IEnumerable<ProductAttributeDetailDTO> GetProductAttributeByID(int productId);
     }
 
 }

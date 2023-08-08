@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Interfaces
 {
-
-    public interface IProductAttributesRepo : IGenericRepo<Product_Attributes>
+    public interface IProductsAttributesRepo2
     {
-        IEnumerable<Product_Attributes> GetProductAttributeByID(int id);
-        
+        IEnumerable<ProductAttributeDetail> GetProductAttributeByID2(int id);
     }
-
 }
