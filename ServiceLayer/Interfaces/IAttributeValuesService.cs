@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceLayer.Models;
 
-namespace DomainLayer.Interfaces
+namespace ServiceLayer.Interfaces
 {
 
     public interface IAttributeValuesService 

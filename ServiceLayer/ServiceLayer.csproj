@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -51,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Interfaces\IAttributesService.cs" />
     <Compile Include="Interfaces\IAttributeValuesService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />
@@ -66,6 +68,8 @@
     <Compile Include="Models\ProductsDTO.cs" />
     <Compile Include="Models\Product_AttributesDTO.cs" />
     <Compile Include="Models\UsersDTO.cs" />
+    <Compile Include="MCService.cs" />
+    <Compile Include="ProductAttributesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserServices.cs" />
   </ItemGroup>
@@ -77,6 +81,10 @@
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
       <Project>{e29ae642-3347-4a9a-8446-574bb15ffbda}</Project>
       <Name>DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryLayer\RepositoryLayer.csproj">
+      <Project>{f5aa7fdc-2608-429f-b019-8a0ba184ce16}</Project>
+      <Name>RepositoryLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

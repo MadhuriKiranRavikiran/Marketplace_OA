@@ -14,6 +14,15 @@ namespace RepositoryLayer
         public ProductAttributesRepo(MarketDBContext context) : base(context)
         {
         }
+
+        public IEnumerable<Product_Attributes> GetProductAttributeByID(int id)
+        {
+            //return Context.Set<Product_Attributes>().Where(p => p.ProductsID == id).ToList();
+            return Context.Set<Product_Attributes>()
+            .Include("Attributes")
+            .Include("Attribute_Values")
+            .Where(p => p.ProductsID == id).ToList();
+        }
     }
 
 }

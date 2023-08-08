@@ -3,11 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiceLayer;
+using ServiceLayer.Interfaces;
+using Marketplace_OA.Models;
+using AutoMapper;
+using ServiceLayer.Models;
 
 namespace Marketplace_OA.Controllers
 {
     public class ProductController : Controller
     {
+        //code for product details
+        public IProductAttributesService ProductAttributesService;
+        private Mapper mapper;
+
+        public ProductController()
+        {
+            ProductAttributesService = new ProductAttributesService();
+
+            //using automapper 
+            var config = new MapperConfiguration(cfg =>
+            {
+                // Configuring Map
+                cfg.CreateMap<Product_AttributesDTO, ProductAttributesVM>();
+                // Any Other Mapping Configuration ....
+            });
+            // Create an Instance of Mapper and return that Instance
+            mapper = new Mapper(config);
+        }
+
+        public ActionResult ProductDetail(int? id)
+        {
+            int ID = 2;
+            var product = new Dictionary<string, string>();
+            product.Add("Description", "Exide Car Battery 60 Ah Description");
+            var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(ID));
+            ViewBag.Product = product;
+            ViewBag.ProductAttributes = productAttribute;
+            return View();
+
+        }
+
+
+
+
         // GET: SearchPage
         public ActionResult Search()
         {
