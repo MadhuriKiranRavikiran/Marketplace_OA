@@ -12,5 +12,6 @@ namespace Marketplace_OA.Models
         public string Attribute_Name { get; set; }
         public Nullable<int> Attribute_Value_ID { get; set; }
         public string Attribute_Value { get; set; }
+        public string Value_Type { get; set; }
     }
 }

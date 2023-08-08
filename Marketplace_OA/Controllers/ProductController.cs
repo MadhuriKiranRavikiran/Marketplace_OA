@@ -32,13 +32,15 @@ namespace Marketplace_OA.Controllers
             mapper = new Mapper(config);
         }
 
-        public ActionResult ProductDetail()
+        public ActionResult ProductDetail(int? id)
         {
-            //Hard code id
-            int id = 2;
-            var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(id));
-
-            return View(productAttribute);
+            int ID = 2;
+            var product = new Dictionary<string, string>();
+            product.Add("Description", "Exide Car Battery 60 Ah Description");
+            var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(ID));
+            ViewBag.Product = product;
+            ViewBag.ProductAttributes = productAttribute;
+            return View();
 
         }
 
