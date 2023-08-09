@@ -1,49 +1,53 @@
-﻿
-@{
-    Layout = "~/Views/Shared/_SearchLayout.cshtml";
-    ViewBag.Title = "Search";
+﻿@{
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+    ViewBag.Title = "ProductPartial";
 }
 
 
-<div class="container">
-    <div class="logo">
-        <h1 class="company-name" style="margin: 0 -20px;">
-            j
-            <span class="light-circle"></span>
-            <span class="dark-circle"></span>
-            le
-        </h1>
-    </div>
-    <br /><p class="slogan">Building Product Selection Platform</p>
-
-    <div class="mt-5">
-        <div class="row">
-            <form action="/Product/Search" method="post" id="searchForm">
-
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton">Category</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @*<a class="dropdown-item" href="#" data-category="A">Mechanical</a>
-                                <a class="dropdown-item" href="#" data-category="B">Electrical</a>
-                                <a class="dropdown-item" href="#" data-category="C">Stationary</a>
-                                <a class="dropdown-item" href="#" data-category="D">Furniture</a>*@
-                        </div>
-
-                    </div>
-                    <input type="text" class="form-control search-input" name="subCategory" id="SubCategory" placeholder="Search...">
-                    <input type="hidden" id="hiddenSubCategoryId" name="subCategoryId" />
-                    <div class="input-group-append">
-                        <button class="btn btn-primary search-btn" id="searchButton">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    <input type="hidden" name="mainCategory" id="hiddenMainCategory" value="">
-                </div>
-            </form>
+<div class="container1" style="margin:0">
+    <div class="row" style="margin:0">
+        <div class="logo col-2">
+            <h1 class="company-name" style="margin: 0 -20px;">
+                j
+                <span class="light-circle"></span>
+                <span class="dark-circle"></span>
+                le
+            </h1>
         </div>
 
+        <div class="container container-search-box col-7">
+            <div class="row">
+                <form action="/Product/Search" method="post" id="searchForm">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton">Category</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @*<a class="dropdown-item" href="#" data-category="A">Mechanical</a>
+                                    <a class="dropdown-item" href="#" data-category="B">Electrical</a>
+                                    <a class="dropdown-item" href="#" data-category="C">Stationary</a>
+                                    <a class="dropdown-item" href="#" data-category="D">Furniture</a>*@
+                            </div>
+
+                        </div>
+                        <input type="text" class="form-control search-input" name="subCategory" id="SubCategory" placeholder="Search...">
+                        <input type="hidden" id="hiddenSubCategoryId" name="subCategoryId" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary search-btn" id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <input type="hidden" name="mainCategory" id="hiddenMainCategory" value="">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-3">
+
+        </div>
     </div>
+
 
 </div>
 
@@ -134,4 +138,3 @@
         });
     </script>
 }
-

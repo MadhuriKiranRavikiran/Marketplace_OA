@@ -137,7 +137,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoriesVM.cs" />
+    <Compile Include="Models\MainCategoriesVM.cs" />
+    <Compile Include="Models\ProductAttributeDetailVM.cs" />
     <Compile Include="Models\ProductAttributesVM.cs" />
+    <Compile Include="Models\ProductsVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +164,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\image1.png" />
+    <Content Include="Images\image2.png" />
+    <Content Include="Images\image3.png" />
+    <Content Include="Images\image4.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -196,7 +204,9 @@
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Shared\_SearchLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\Shared\_ProductDetailLayout.cshtml" />
+    <Content Include="Views\Product\_ProductPartialView.cshtml" />
+    <Content Include="Views\Product\ProductCompare.cshtml" />
+    <Content Include="Views\Shared\_ProductLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@ namespace DomainLayer.Interfaces
 
     public interface IProductsRepo : IGenericRepo<Products>
     {
-
+        IEnumerable<ProductAttributeDetail> GetProductAttributeByID(int productId);
     }
 
 }

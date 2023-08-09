@@ -59,12 +59,14 @@
     <Compile Include="Interfaces\ICategoriesService.cs" />
     <Compile Include="Interfaces\IMainCategoriesService.cs" />
     <Compile Include="Interfaces\IProductAttributesService.cs" />
+    <Compile Include="Interfaces\IProductGetAttributeService.cs" />
     <Compile Include="Interfaces\IProductsService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Models\AttributesDTO.cs" />
     <Compile Include="Models\Attribute_ValuesDTO.cs" />
     <Compile Include="Models\CategoriesDTO.cs" />
     <Compile Include="Models\MainCategoriesDTO.cs" />
+    <Compile Include="Models\ProductAttributeDetailDTO.cs" />
     <Compile Include="Models\ProductsDTO.cs" />
     <Compile Include="Models\Product_AttributesDTO.cs" />
     <Compile Include="Models\UsersDTO.cs" />

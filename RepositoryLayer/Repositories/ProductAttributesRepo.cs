@@ -21,6 +21,7 @@ namespace RepositoryLayer
             return Context.Set<Product_Attributes>()
             .Include("Attributes")
             .Include("Attribute_Values")
+            .Include("Products")
             .Where(p => p.ProductsID == id).ToList();
         }
     }

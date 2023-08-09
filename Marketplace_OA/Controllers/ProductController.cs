@@ -8,12 +8,21 @@ using ServiceLayer.Interfaces;
 using Marketplace_OA.Models;
 using AutoMapper;
 using ServiceLayer.Models;
+//using DomainLayer.Interfaces;
 
 namespace Marketplace_OA.Controllers
 {
     public class ProductController : Controller
     {
-        //code for product details
+
+        //code for category
+        public IMainCategoriesService _mainCategoriesService;
+        public ICategoriesService _categoriesService;
+        // code for product details and attributes
+        public IProductGetAttributeService _productsService;
+
+
+        //code for product attributes
         public IProductAttributesService ProductAttributesService;
         private Mapper mapper;
 
@@ -21,30 +30,67 @@ namespace Marketplace_OA.Controllers
         {
             ProductAttributesService = new ProductAttributesService();
 
+            _mainCategoriesService = new MCService();
+            _categoriesService = new MCService();
+            _productsService = new MCService();
+
+
             //using automapper 
             var config = new MapperConfiguration(cfg =>
             {
                 // Configuring Map
                 cfg.CreateMap<Product_AttributesDTO, ProductAttributesVM>();
+
+
+                cfg.CreateMap<ProductAttributeDetailDTO, ProductAttributeDetailVM>();
+                cfg.CreateMap<ProductsDTO, ProductsVM>();
+                cfg.CreateMap<MainCategoriesDTO, MainCategoriesVM>();
+                cfg.CreateMap<CategoriesDTO, CategoriesVM>();
                 // Any Other Mapping Configuration ....
             });
             // Create an Instance of Mapper and return that Instance
             mapper = new Mapper(config);
         }
 
-        public ActionResult ProductDetail(int? id)
+        public ActionResult ProductDetail(string mainCategory, string subCategory, int subCategoryId, int id)
         {
-            int ID = 2;
-            var product = new Dictionary<string, string>();
-            product.Add("Description", "Exide Car Battery 60 Ah Description");
-            var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(ID));
-            ViewBag.Product = product;
+            int ProductID = id;
+            var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(ProductID));
+
+            //List<ProductAttributeDetailVM> productDetailVM = new List<ProductAttributeDetailVM>();
+            //var productDetail = _productsService.GetProductById(ProductID);
+            //foreach (var product in productDetail)
+            //{
+            //    productDetailVM.Add(new ProductAttributeDetailVM
+            //    {
+            //        ProductsID = product.ProductsID,
+            //        Product_Name = product.Product_Name,
+            //        Description = product.Description,
+            //        CategoriesID = product.CategoriesID,
+            //        AttributesID = product.AttributesID,
+            //        Attribute_Name = product.Attribute_Name,
+            //        Attribute_Value = product.Attribute_Value,
+            //    });
+            //}
+
+            //try DTO VM
+            var productDetailVM = mapper.Map<List<ProductAttributeDetailVM>>(_productsService.GetProductById(ProductID));
+
+            ViewBag.mainCategory = mainCategory;
+            ViewBag.subCategory = subCategory;
+            ViewBag.subCategoryId = subCategoryId;
+            ViewBag.ProductDetail = productDetailVM;
             ViewBag.ProductAttributes = productAttribute;
             return View();
 
         }
 
-
+        public ActionResult ProductCompare(string ids)
+        {
+            var productIds = ids.Split(',').Select(int.Parse).ToList();
+            ViewBag.ProductIds = productIds;
+            return View();
+        }
 
 
         // GET: SearchPage
@@ -56,57 +102,118 @@ namespace Marketplace_OA.Controllers
         // Method called from Search View to get Main category
         public JsonResult GetMainCategories()
         {
-            // Simulated main categories fetched from a database
-            var mainCategories = new List<string> { "Mechanical", "Electrical", "Stationery", "Furniture" };
 
-            return Json(mainCategories, JsonRequestBehavior.AllowGet);
+            //var mainCategories = _mainCategoriesService.GetAllMainCategories();
+            ////var mainCategoriesVM = _mapper.Map<List<MainCategoriesVM>>(mainCategories);
+            //List<MainCategoriesVM> mainCategoriesVM = new List<MainCategoriesVM>();
+
+            //foreach (var mainCategory in mainCategories)
+            //{
+            //    mainCategoriesVM.Add(new MainCategoriesVM
+            //    {
+            //        MainCategoriesID = mainCategory.MainCategoriesID,
+            //        Main_Category_Name = mainCategory.Main_Category_Name,
+            //    });
+            //}
+
+            //try DTO
+            var mainCategoriesVM = mapper.Map<List<MainCategoriesVM>>(_mainCategoriesService.GetAllMainCategories());
+            return Json(mainCategoriesVM, JsonRequestBehavior.AllowGet);
         }
 
         // Method called from Search View to get Subcategory
-        public JsonResult GetSubCategories(string mainCategoryId)
+        public JsonResult GetSubCategories(int MainCategoryId)
         {
-            // Simulated subcategories based on the main category
-            var subCategoriesData = new Dictionary<string, List<string>>
-            {
-                { "Mechanical", new List<string> { "Car Battery", "Air Conditioner" } },
-                { "Electrical", new List<string> { "Desk Lamp", "Electric Drill" } },
-                { "Stationery", new List<string> { "Fountain Pen", "Notebook" } },
-                { "Furniture", new List<string> { "Office Chair", "Sofa" } },
-            };
 
-            var subCategories = subCategoriesData.ContainsKey(mainCategoryId)
-                ? subCategoriesData[mainCategoryId]
-                : new List<string>();
+            //var Category = _categoriesService.GetCategoryById(MainCategoryId);
+            //List<CategoriesVM> CategoriesVM = new List<CategoriesVM>();
+            //foreach (var category in Category)
+            //{
+            //    CategoriesVM.Add(new CategoriesVM
+            //    {
+            //        CategoriesID = category.CategoriesID,
+            //        Category_Name = category.Category_Name,
+            //        MainCategoriesID = category.MainCategoriesID,
+            //    });
+            //}
 
-            return Json(subCategories, JsonRequestBehavior.AllowGet);
+            //try DTO
+            var CategoriesVM = mapper.Map<List<CategoriesVM>>(_categoriesService.GetCategoryById(MainCategoryId));
+            return Json(CategoriesVM, JsonRequestBehavior.AllowGet);
         }
 
         // show product list page based on subcategory
         [HttpPost]
-        public ActionResult Search(string mainCategory, string subCategory)
+        public ActionResult Search(string mainCategory, string subCategory, int subCategoryId)
         {
-            // Use mainCategory and searchTerm to search the products in your database
 
-            // hardcode for test
             var maincategory = mainCategory;
             var subcategory = subCategory;
-            var products = new Dictionary<string, List<string>>();
-            products.Add("maincategory", new List<string> { maincategory });
-            products.Add("subcategory", new List<string> { subcategory });
-            products.Add("products", new List<string> { "Philips Desk Lamp 60 Watts", "Ikea Desk Lamp 10 Watts" });
-            // Store the products in TempData (or another appropriate storage) to pass to the ProductList view
-            TempData["Products"] = products;
+            var subcategoryid = subCategoryId;
             // Redirect to the ProductList action to display the results
-            return RedirectToAction("ProductList");
+            return RedirectToAction("ProductList", new { mainCategory = maincategory, subCategory = subcategory, subCategoryId = subcategoryid });
         }
 
-        public ActionResult ProductList()
+        public ActionResult ProductList(string mainCategory, string subCategory, int subCategoryId)
         {
-            // Retrieve the products from TempData
-            var products = TempData["Products"] as Dictionary<string, List<string>>;
 
-            // Pass the products to the view
-            return View(products);
+            int CategoryId = subCategoryId;
+            //var products = _productsService.GetProductsByCategory(CategoryId);
+            //List<ProductsVM> productsVM = new List<ProductsVM>();
+            //foreach (var product in products)
+            //{
+            //    productsVM.Add(new ProductsVM
+            //    {
+            //        ProductsID = product.ProductsID,
+            //        Product_Name = product.Product_Name,
+            //        Description = product.Description,
+            //        CategoriesID = product.CategoriesID,
+            //        Image_URL = product.Image_URL,
+            //    });
+            //}
+
+            //try DTO VM
+
+            var productsVM = mapper.Map<List<ProductsVM>>(_productsService.GetProductsByCategory(CategoryId));
+
+
+            //get product details
+            List<ProductAttributeDetailVM> productDetailVM = new List<ProductAttributeDetailVM>();
+            foreach (var item in productsVM)
+            {   //get product id
+                var product_id = item.ProductsID;
+                var productDetail = _productsService.GetProductById(product_id);
+
+                foreach (var product in productDetail)
+                {
+                    productDetailVM.Add(new ProductAttributeDetailVM
+                    {
+                        ProductsID = product.ProductsID,
+                        Product_Name = product.Product_Name,
+                        Description = product.Description,
+                        CategoriesID = product.CategoriesID,
+                        AttributesID = product.AttributesID,
+                        Attribute_Name = product.Attribute_Name,
+                        Attribute_Value = product.Attribute_Value,
+
+                    });
+                }
+            }
+
+            //try DTO VM
+            //var productDetailVM = mapper.Map<List<ProductAttributeDetailVM>>(_productsService.GetProductById(product_id));
+
+
+            ViewBag.mainCategory = mainCategory;
+            ViewBag.subCategory = subCategory;
+            ViewBag.subCategoryId = subCategoryId;
+            //ViewBag.mainCategory = "Mechanical";
+            //ViewBag.subCategory = "Car Battery";
+            //ViewBag.subCategoryId = 1;
+            ViewBag.productsVM = productsVM;
+            ViewBag.productDetailVM = productDetailVM;
+
+            return View();
         }
     }
 }

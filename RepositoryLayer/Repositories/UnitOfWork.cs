@@ -21,6 +21,8 @@ namespace RepositoryLayer.Repositories
         public IUsersRepo UsersRepo { get; }
         public IProductAttributesRepo ProductAttributesRepo { get; }
 
+        public IProductsAttributesRepo2 ProductsAttributesRepo { get; }
+
         public UnitOfWork(MarketDBContext context)
         {
             _context = context;
@@ -31,6 +33,8 @@ namespace RepositoryLayer.Repositories
             CategoriesRepo = new CategoriesRepo(_context);
             UsersRepo = new UsersRepo(_context);
             ProductAttributesRepo = new ProductAttributesRepo(_context);
+
+            ProductsAttributesRepo = new ProductAttributesRepo2(_context);
         }
 
         public int Save()
