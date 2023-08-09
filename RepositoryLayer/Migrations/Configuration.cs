@@ -16,11 +16,14 @@
 
         protected override void Seed(RepositoryLayer.MarketDBContext context)
         {
+            //  This method will be called after migrating to the latest version.
 
-            // write your code here to add intial data
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
+
             var users = new List<Users>
             {
-                new Users {UsersID = 1, User_Name = "test", User_Email = "test@test", Password = "123"}
+                new Users {UsersID = 1, User_Name = "test", User_Email = "test@test", Password = "123", ConfirmPassword = "123"}
             };
             users.ForEach(s => context.Users.Add(s));
             context.SaveChanges();
@@ -253,7 +256,6 @@
             };
             productAttributes.ForEach(s => context.Product_Attributes.Add(s));
             context.SaveChanges();
-
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Interfaces;
 using DomainLayer.Models;
 using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

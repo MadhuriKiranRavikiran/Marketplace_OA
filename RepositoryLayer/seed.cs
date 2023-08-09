@@ -22,7 +22,7 @@ namespace RepositoryLayer
 
             //var users = new List<Users>
             //{
-            //    new Users {UsersID = 1, User_Name = "test", User_Email = "test@test", Password = "123"}
+            //    new Users {UsersID = 1, User_Name = "test", User_Email = "test@test", Password = "123", ConfirmPassword = "123"}
             //};
             //users.ForEach(s => context.Users.Add(s));
             //context.SaveChanges();
