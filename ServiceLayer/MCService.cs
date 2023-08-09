@@ -99,14 +99,27 @@ namespace ServiceLayer
         }
 
 
-        public IEnumerable<Products> GetProductsByCategory(int CategoryId)
+        IEnumerable<ProductsDTO> IProductGetAttributeService.GetProductsByCategory(int CategoryId)
         {
-            var products = _unitOfWork.ProductsRepo.GetProductsByCategory(CategoryId);
+            var products = _unitOfWork.ProductsAttributesRepo.GetProductsByCategory(CategoryId);
 
-            return (IEnumerable<Products>)mapper.Map<List<ProductsDTO>>(products);
+            List<ProductsDTO> productsDTO = new List<ProductsDTO>();
+            foreach (var product in products)
+            {
+                productsDTO.Add(new ProductsDTO
+                {
+                    ProductsID = product.ProductsID,
+                    Product_Name = product.Product_Name,
+                    Description = product.Description,
+                    CategoriesID = product.CategoriesID,
+                    Image_URL = product.Image_URL,
+                    
+                    
+                });
+            }
+
+            return productsDTO;
         }
-
-        
     }
         
     }

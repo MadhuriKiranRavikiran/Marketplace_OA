@@ -10,5 +10,6 @@ namespace DomainLayer.Interfaces
     public interface IProductsAttributesRepo2
     {
         IEnumerable<ProductAttributeDetail> GetProductAttributeByID2(int id);
+        IEnumerable<Products> GetProductsByCategory(int CategoryId);
     }
 }

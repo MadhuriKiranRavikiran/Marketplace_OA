@@ -11,7 +11,7 @@ namespace DomainLayer.Interfaces
     public interface IProductsRepo : IGenericRepo<Products>
     {
         IEnumerable<ProductAttributeDetail> GetProductAttributeByID(int productId);
-        IEnumerable<Products> GetProductsByCategory(int CategoryId);
+        
     }
 
 }

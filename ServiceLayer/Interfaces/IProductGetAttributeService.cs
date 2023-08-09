@@ -1,4 +1,5 @@
-﻿using ServiceLayer.Models;
+﻿using DomainLayer.Models;
+using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace ServiceLayer.Interfaces
     {
 
         IEnumerable<ProductAttributeDetailDTO> GetProductById(int ProductID);
+        IEnumerable<ProductsDTO> GetProductsByCategory(int CategoryId);
     }
 }

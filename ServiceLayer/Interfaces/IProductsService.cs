@@ -11,8 +11,8 @@ namespace ServiceLayer.Interfaces
 
     public interface IProductsService
     {
-        IEnumerable<Products> GetProductsByCategory(int CategoryId);
-        IEnumerable<Products> GetProductById(int MainCategoryId);
+        IEnumerable<ProductsDTO> GetProductsByCategory(int CategoryId);
+
         IEnumerable<ProductAttributeDetailDTO> GetProductAttributeByID(int productId);
     }
 

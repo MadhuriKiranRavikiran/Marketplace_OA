@@ -209,6 +209,7 @@
     <Content Include="Views\Home\GetProductsById.cshtml" />
     <Content Include="Views\Home\MainCategories.cshtml" />
     <Content Include="Views\Home\GetProductDetail.cshtml" />
+    <Content Include="Views\Home\GetProductsByCategoryId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

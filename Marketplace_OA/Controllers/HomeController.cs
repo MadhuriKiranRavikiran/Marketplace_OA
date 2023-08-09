@@ -18,6 +18,7 @@ namespace Marketplace_OA.Controllers
         public IMainCategoriesService _mainCategoriesService;
         public ICategoriesService _categoriesService;
         public IProductGetAttributeService _productsService;
+       
 
         public Mapper _mapper;
 
@@ -95,6 +96,27 @@ namespace Marketplace_OA.Controllers
             int productID = 1001;
             var products = _productsService.GetProductById(productID);
             var productsVM = _mapper.Map<List<ProductsVM>>(products);
+            return View(productsVM);
+        }
+
+        public ActionResult GetProductsByCategoryId()
+
+        {
+            int CategoryId = 101;
+            var products = _productsService.GetProductsByCategory(CategoryId);
+            List<ProductsVM> productsVM = new List<ProductsVM>();
+            foreach (var product in products)
+            {
+                productsVM.Add(new ProductsVM
+                {
+                    ProductsID = product.ProductsID,
+                    Product_Name = product.Product_Name,
+                    Description = product.Description,
+                    CategoriesID = product.CategoriesID,
+                    Image_URL   = product.Image_URL,
+                });
+            }
+            
             return View(productsVM);
         }
 

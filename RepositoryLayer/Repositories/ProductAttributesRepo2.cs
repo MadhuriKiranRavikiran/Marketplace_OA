@@ -40,5 +40,13 @@ namespace RepositoryLayer.Repositories
 
             return result.ToList();
         }
+
+        public IEnumerable<Products> GetProductsByCategory(int CategoryId)
+        {
+
+            var ProductsList = Context.Set<Products>().Where(category => category.CategoriesID == CategoryId);
+
+            return ProductsList.ToList();
+        }
     }
 }
