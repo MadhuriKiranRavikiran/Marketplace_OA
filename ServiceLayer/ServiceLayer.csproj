@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributesService.cs" />
+    <Compile Include="Filters.cs" />
     <Compile Include="Interfaces\IAttributesService.cs" />
     <Compile Include="Interfaces\IAttributeValuesService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />

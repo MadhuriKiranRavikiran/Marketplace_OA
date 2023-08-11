@@ -8,7 +8,7 @@ using ServiceLayer.Models;
 namespace ServiceLayer.Interfaces
 {
 
-    public interface IAttributeValuesService 
+    public interface IAttributeValuesService
     {
         IEnumerable<AttributesDTO> GetByAttributeId();
     }

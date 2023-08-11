@@ -8,9 +8,9 @@ using ServiceLayer.Models;
 namespace ServiceLayer.Interfaces
 {
     public interface IMainCategoriesService
-    { 
+    {
         IEnumerable<MainCategoriesDTO> GetAllMainCategories();
-     
+
 
     }
 }

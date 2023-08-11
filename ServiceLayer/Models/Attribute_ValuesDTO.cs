@@ -13,7 +13,7 @@ namespace ServiceLayer.Models
         public string Attribute_Value { get; set; }
 
         public virtual AttributesDTO Attributes { get; set; }
-        
+
         public virtual ICollection<Product_AttributesDTO> Product_Attributes { get; set; }
     }
 

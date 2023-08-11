@@ -30,6 +30,7 @@ namespace RepositoryLayer.Repositories
                              ProductsID = p.ProductsID,
                              Product_Name = p.Product_Name,
                              Description = p.Description,
+                             Image_URL = p.Image_URL,
                              CategoriesID = (int)p.CategoriesID,
                              AttributesID = pa.AttributesID,
                              Attribute_Name = a.Attribute_Name,

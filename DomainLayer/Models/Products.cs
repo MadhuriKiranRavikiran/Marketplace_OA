@@ -19,3 +19,4 @@ namespace DomainLayer.Models
         public virtual ICollection<Product_Attributes> Product_Attributes { get; set; }
     }
 }
+

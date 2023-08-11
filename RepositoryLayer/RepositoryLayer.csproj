@@ -57,6 +57,7 @@
     <Compile Include="Repositories\AttributeRepo.cs" />
     <Compile Include="Repositories\AttributesValueRepo.cs" />
     <Compile Include="Repositories\CategoriesRepo.cs" />
+    <Compile Include="Repositories\Filters.cs" />
     <Compile Include="Repositories\GenericRepo.cs" />
     <Compile Include="Repositories\MainCategoriesRepo.cs" />
     <Compile Include="Repositories\ProductAttributesRepo.cs" />

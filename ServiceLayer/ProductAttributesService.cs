@@ -28,6 +28,8 @@ namespace ServiceLayer
             {
                 cfg.CreateMap<Product_Attributes, Product_AttributesDTO>();
 
+                cfg.CreateMap<Attributes, AttributesDTO>();
+
             });
             mapper = new Mapper(config);
         }
@@ -61,5 +63,7 @@ namespace ServiceLayer
 
 
         }
+
+
     }
 }

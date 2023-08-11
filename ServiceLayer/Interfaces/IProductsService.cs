@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceLayer.Models;
 
-namespace ServiceLayer.Interfaces
+namespace DomainLayer.Interfaces
 {
 
-    public interface IProductsService
-    { 
+    public interface IProductsRepo
+    {
         IEnumerable<ProductsDTO> GetAllProducts();
 
         IEnumerable<ProductsDTO> GetProductsByCategory(int CategoryId);

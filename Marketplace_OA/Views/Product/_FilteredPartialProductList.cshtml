@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+    var productList = ViewBag.productsVM as List<Marketplace_OA.Models.ProductsVM>;
+    var productDetail = ViewBag.productDetailVM as List<Marketplace_OA.Models.ProductAttributeDetailVM>;
+    var filterAttribute = ViewBag.filterAttribute as List<Marketplace_OA.Models.AttributesVM>;
+}
+
+
+@foreach (var item in productList)
+{
+    <div class="col-lg-3 col-md-6 col-sm-12  mb-4">
+
+        <div class="card" style="width: 18rem; ">
+            <a href="@Url.Action("ProductDetail", "Product", new { mainCategory=ViewBag.mainCategory, subCategory=ViewBag.subCategory, subCategoryId=item.CategoriesID, id = item.ProductsID})" class="text-decoration-none text-dark">
+                <img class="card-img-top" src="~/Images/@item.Image_URL" style="height: 12rem; width: 16rem;" alt="Product image">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Product_Name</h5>
+                    <p class="card-text">@item.Description</p>
+                </div>
+            </a>
+            <ul class="list-group list-group-flush">
+                @foreach (var itemdetail in productDetail.Where(a => a.ProductsID == item.ProductsID).Take(2))
+                {
+                    <li class="list-group-item" style="border: none;">
+                        @itemdetail.Attribute_Value @itemdetail.Attribute_Name
+                    </li>
+                }
+            </ul>
+
+            <div class="card-body">
+                <input type="checkbox" class="CheckedProduct" value="@item.ProductsID" />  Compare
+            </div>
+        </div>
+
+    </div>
+}

@@ -137,7 +137,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttributesVM.cs" />
     <Compile Include="Models\CategoriesVM.cs" />
+    <Compile Include="Models\FilteredViewModel.cs" />
+    <Compile Include="Models\FilterView.cs" />
     <Compile Include="Models\MainCategoriesVM.cs" />
     <Compile Include="Models\ProductAttributeDetailVM.cs" />
     <Compile Include="Models\ProductAttributesVM.cs" />
@@ -165,7 +168,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\image1.png" />
+    <Content Include="Images\image17.png" />
+    <Content Include="Images\image18.png" />
+    <Content Include="Images\image19.png" />
     <Content Include="Images\image2.png" />
+    <Content Include="Images\image20.png" />
     <Content Include="Images\image3.png" />
     <Content Include="Images\image4.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -207,6 +214,7 @@
     <Content Include="Views\Product\_ProductPartialView.cshtml" />
     <Content Include="Views\Product\ProductCompare.cshtml" />
     <Content Include="Views\Shared\_ProductLayout.cshtml" />
+    <Content Include="Views\Product\_FilteredPartialProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -240,6 +248,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj">
+      <Project>{e29ae642-3347-4a9a-8446-574bb15ffbda}</Project>
+      <Name>DomainLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
       <Project>{1e478418-28fe-45fd-995e-86992da47cd9}</Project>
       <Name>ServiceLayer</Name>

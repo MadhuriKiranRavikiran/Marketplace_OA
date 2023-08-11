@@ -8,7 +8,12 @@ using ServiceLayer.Interfaces;
 using Marketplace_OA.Models;
 using AutoMapper;
 using ServiceLayer.Models;
-//using DomainLayer.Interfaces;
+using DomainLayer.Interfaces;
+using DomainLayer.Models;
+using WebGrease;
+using System.Web.Script.Serialization;
+using System.IO;
+using static System.Net.WebRequestMethods;
 
 namespace Marketplace_OA.Controllers
 {
@@ -24,11 +29,16 @@ namespace Marketplace_OA.Controllers
 
         //code for product attributes
         public IProductAttributesService ProductAttributesService;
+
+        //code for attributes table
+        public IAttributesService AttributesService;
         private Mapper mapper;
 
         public ProductController()
         {
             ProductAttributesService = new ProductAttributesService();
+
+            AttributesService = new AttributesService();
 
             _mainCategoriesService = new MCService();
             _categoriesService = new MCService();
@@ -40,9 +50,10 @@ namespace Marketplace_OA.Controllers
             {
                 // Configuring Map
                 cfg.CreateMap<Product_AttributesDTO, ProductAttributesVM>();
-
+                cfg.CreateMap<AttributesDTO, AttributesVM>();
 
                 cfg.CreateMap<ProductAttributeDetailDTO, ProductAttributeDetailVM>();
+
                 cfg.CreateMap<ProductsDTO, ProductsVM>();
                 cfg.CreateMap<MainCategoriesDTO, MainCategoriesVM>();
                 cfg.CreateMap<CategoriesDTO, CategoriesVM>();
@@ -56,22 +67,6 @@ namespace Marketplace_OA.Controllers
         {
             int ProductID = id;
             var productAttribute = mapper.Map<List<ProductAttributesVM>>(ProductAttributesService.GetProductAttributes(ProductID));
-
-            //List<ProductAttributeDetailVM> productDetailVM = new List<ProductAttributeDetailVM>();
-            //var productDetail = _productsService.GetProductById(ProductID);
-            //foreach (var product in productDetail)
-            //{
-            //    productDetailVM.Add(new ProductAttributeDetailVM
-            //    {
-            //        ProductsID = product.ProductsID,
-            //        Product_Name = product.Product_Name,
-            //        Description = product.Description,
-            //        CategoriesID = product.CategoriesID,
-            //        AttributesID = product.AttributesID,
-            //        Attribute_Name = product.Attribute_Name,
-            //        Attribute_Value = product.Attribute_Value,
-            //    });
-            //}
 
             //try DTO VM
             var productDetailVM = mapper.Map<List<ProductAttributeDetailVM>>(_productsService.GetProductById(ProductID));
@@ -103,20 +98,6 @@ namespace Marketplace_OA.Controllers
         public JsonResult GetMainCategories()
         {
 
-            //var mainCategories = _mainCategoriesService.GetAllMainCategories();
-            ////var mainCategoriesVM = _mapper.Map<List<MainCategoriesVM>>(mainCategories);
-            //List<MainCategoriesVM> mainCategoriesVM = new List<MainCategoriesVM>();
-
-            //foreach (var mainCategory in mainCategories)
-            //{
-            //    mainCategoriesVM.Add(new MainCategoriesVM
-            //    {
-            //        MainCategoriesID = mainCategory.MainCategoriesID,
-            //        Main_Category_Name = mainCategory.Main_Category_Name,
-            //    });
-            //}
-
-            //try DTO
             var mainCategoriesVM = mapper.Map<List<MainCategoriesVM>>(_mainCategoriesService.GetAllMainCategories());
             return Json(mainCategoriesVM, JsonRequestBehavior.AllowGet);
         }
@@ -125,19 +106,6 @@ namespace Marketplace_OA.Controllers
         public JsonResult GetSubCategories(int MainCategoryId)
         {
 
-            //var Category = _categoriesService.GetCategoryById(MainCategoryId);
-            //List<CategoriesVM> CategoriesVM = new List<CategoriesVM>();
-            //foreach (var category in Category)
-            //{
-            //    CategoriesVM.Add(new CategoriesVM
-            //    {
-            //        CategoriesID = category.CategoriesID,
-            //        Category_Name = category.Category_Name,
-            //        MainCategoriesID = category.MainCategoriesID,
-            //    });
-            //}
-
-            //try DTO
             var CategoriesVM = mapper.Map<List<CategoriesVM>>(_categoriesService.GetCategoryById(MainCategoryId));
             return Json(CategoriesVM, JsonRequestBehavior.AllowGet);
         }
@@ -156,6 +124,188 @@ namespace Marketplace_OA.Controllers
 
         public ActionResult ProductList(string mainCategory, string subCategory, int subCategoryId)
         {
+            // input: string mainCategory, string subCategory, int subCategoryId
+            //string mainCategory = "Mechanical";
+            //string subCategory = "Car Battery";
+            //int subCategoryId = 1;
+
+            int CategoryId = subCategoryId;
+
+
+            var productsVM = mapper.Map<List<ProductsVM>>(_productsService.GetProductsByCategory(CategoryId));
+
+
+            //get product details
+            List<ProductAttributeDetailVM> productDetailVM = new List<ProductAttributeDetailVM>();
+            foreach (var item in productsVM)
+            {   //get product id
+                var product_id = item.ProductsID;
+                var productDetail = _productsService.GetProductById(product_id);
+
+                foreach (var product in productDetail)
+                {
+                    productDetailVM.Add(new ProductAttributeDetailVM
+                    {
+                        ProductsID = product.ProductsID,
+                        Product_Name = product.Product_Name,
+                        Description = product.Description,
+                        CategoriesID = product.CategoriesID,
+                        AttributesID = product.AttributesID,
+                        Attribute_Name = product.Attribute_Name,
+                        Attribute_Value = product.Attribute_Value,
+
+                    });
+                }
+            }
+
+            List<AttributesVM> AttributeByCategoryId = mapper.Map<List<AttributesVM>>(AttributesService.GetAttribute(CategoryId));
+
+
+            ViewBag.mainCategory = mainCategory;
+            ViewBag.subCategory = subCategory;
+            ViewBag.subCategoryId = subCategoryId;
+
+            ViewBag.productsVM = productsVM;
+            ViewBag.productDetailVM = productDetailVM;
+            ViewBag.filterAttribute = AttributeByCategoryId;
+
+            return View();
+        }
+
+        // AJAX Product filter method
+        public ActionResult HandleFilter()
+        {
+            var json = new StreamReader(Request.InputStream).ReadToEnd();
+            var serializer = new JavaScriptSerializer();
+            var filterModel = serializer.Deserialize<FilteredViewModel>(json);
+
+
+            List<FilterCriteria> filter = new List<FilterCriteria>();
+
+            var tilteredAttribute = filterModel.Attributes.ToList();
+            var filterNeededCategoryId = filterModel.Attributes.First().CategoriesID;
+
+            foreach (var attribute in tilteredAttribute)
+            {
+                filter.Add(new FilterCriteria
+                {
+                    AttributeId = attribute.AttributeId,
+                    MinValue = attribute.SelectedMinValue,
+                    MaxValue = attribute.SelectedMaxValue
+                });
+            }
+
+            Filters filters = new Filters();
+            var table = filters.GetFilteredProducts(filterNeededCategoryId, filter);
+
+
+            var mainCategory = filterModel.MainCategory;
+            var subCategory = filterModel.SubCategory;
+
+
+
+            //int CategoryId = subCategoryId;
+            int CategoryId = filterModel.Attributes.First().CategoriesID;
+
+            var productsVM = mapper.Map<List<ProductsVM>>(_productsService.GetProductsByCategory(CategoryId));
+
+
+            // by table know uniqe product id
+            var uniqueProductIds = table.Select(x => x.ProductsID).Distinct().ToList();
+
+            // get products where productid in uniqueProductIds
+            var filteredProductsVM = productsVM.Where(p => uniqueProductIds.Contains(p.ProductsID)).ToList();
+
+            //map domain ProductAttributeDetail to ProductAttributeDetailVM
+            List<ProductAttributeDetailVM> MappedProductDetailVM = new List<ProductAttributeDetailVM>();
+            foreach (var product in table)
+            {
+                MappedProductDetailVM.Add(new ProductAttributeDetailVM
+                {
+                    ProductsID = product.ProductsID,
+                    Product_Name = product.Product_Name,
+                    Description = product.Description,
+                    CategoriesID = product.CategoriesID,
+                    AttributesID = product.AttributesID,
+                    Attribute_Name = product.Attribute_Name,
+                    Attribute_Value = product.Attribute_Value,
+                    Image_URL = product.Image_URL
+                });
+            }
+
+            List<AttributesVM> AttributeByCategoryId = mapper.Map<List<AttributesVM>>(AttributesService.GetAttribute(CategoryId));
+
+            ViewBag.mainCategory = mainCategory;
+            ViewBag.subCategory = subCategory;
+            ViewBag.subCategoryId = CategoryId;
+            ViewBag.productsVM = filteredProductsVM;
+            ViewBag.productDetailVM = MappedProductDetailVM;
+            ViewBag.filterAttribute = AttributeByCategoryId;
+
+            //return Json(filterModel);
+            //return Content("Test response from HandleFilter");
+            //return Json(FilterAttributeModel, JsonRequestBehavior.AllowGet);
+            return PartialView("_FilteredPartialProductList");
+
+        }
+
+        // Handle product list filter clear button
+        [HttpPost]
+        public ActionResult HandleClear(string mainCategory, string subCategory, int subCategoryId)
+        {
+
+
+            int CategoryId = subCategoryId;
+
+            var productsVM = mapper.Map<List<ProductsVM>>(_productsService.GetProductsByCategory(CategoryId));
+
+
+            //get product details
+            List<ProductAttributeDetailVM> productDetailVM = new List<ProductAttributeDetailVM>();
+            foreach (var item in productsVM)
+            {   //get product id
+                var product_id = item.ProductsID;
+                var productDetail = _productsService.GetProductById(product_id);
+
+                foreach (var product in productDetail)
+                {
+                    productDetailVM.Add(new ProductAttributeDetailVM
+                    {
+                        ProductsID = product.ProductsID,
+                        Product_Name = product.Product_Name,
+                        Description = product.Description,
+                        CategoriesID = product.CategoriesID,
+                        AttributesID = product.AttributesID,
+                        Attribute_Name = product.Attribute_Name,
+                        Attribute_Value = product.Attribute_Value,
+
+                    });
+                }
+            }
+
+
+            List<AttributesVM> AttributeByCategoryId = mapper.Map<List<AttributesVM>>(AttributesService.GetAttribute(CategoryId));
+
+
+            ViewBag.mainCategory = mainCategory;
+            ViewBag.subCategory = subCategory;
+            ViewBag.subCategoryId = subCategoryId;
+
+            ViewBag.productsVM = productsVM;
+            ViewBag.productDetailVM = productDetailVM;
+            ViewBag.filterAttribute = AttributeByCategoryId;
+
+            return PartialView("_FilteredPartialProductList");
+
+            // Return a result, such as a PartialView or JSON
+        }
+
+        public ActionResult ProductListTest()
+        {
+            // input: string mainCategory, string subCategory, int subCategoryId
+            string mainCategory = "Mechanical";
+            string subCategory = "Car Battery";
+            int subCategoryId = 1;
 
             int CategoryId = subCategoryId;
             //var products = _productsService.GetProductsByCategory(CategoryId);
@@ -200,20 +350,74 @@ namespace Marketplace_OA.Controllers
                 }
             }
 
-            //try DTO VM
-            //var productDetailVM = mapper.Map<List<ProductAttributeDetailVM>>(_productsService.GetProductById(product_id));
-
+            // build FilterView object for current subcategory
+            int firstProductID = productsVM.First().ProductsID;
+            List<FilterView> filterAttribute = new List<FilterView>();
+            foreach (var item in productDetailVM.Where(a => a.ProductsID == firstProductID))
+            {
+                filterAttribute.Add(new FilterView
+                {
+                    AttributesID = item.AttributesID,
+                    Attribute_Name = item.Attribute_Name,
+                    Attribute_Max = 100,
+                    Attribute_Min = 10
+                });
+            }
 
             ViewBag.mainCategory = mainCategory;
             ViewBag.subCategory = subCategory;
             ViewBag.subCategoryId = subCategoryId;
-            //ViewBag.mainCategory = "Mechanical";
-            //ViewBag.subCategory = "Car Battery";
-            //ViewBag.subCategoryId = 1;
             ViewBag.productsVM = productsVM;
             ViewBag.productDetailVM = productDetailVM;
-
+            ViewBag.filterAttribute = filterAttribute;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult HandleFilterTest()
+        {
+
+
+            FilteredViewModel model = new FilteredViewModel();
+
+            foreach (var key in Request.Form.AllKeys)
+            {
+                // Split the key to extract information
+                var parts = key.Split('.');
+                if (parts.Length == 3 && parts[0] == "Attributes")
+                {
+                    int index;
+                    if (int.TryParse(parts[1].Replace("[", "").Replace("]", ""), out index))
+                    {
+                        if (model.Attributes.Count <= index)
+                        {
+                            model.Attributes.Add(new FilteredViewModel.AttributeFilter());
+                        }
+
+                        var value = Request.Form[key];
+                        switch (parts[2])
+                        {
+                            case "AttributeId":
+                                model.Attributes[index].AttributeId = int.Parse(value);
+                                break;
+                            case "SelectedMaxValue":
+                                model.Attributes[index].SelectedMaxValue = int.Parse(value);
+                                break;
+                            case "SelectedMinValue":
+                                model.Attributes[index].SelectedMinValue = int.Parse(value);
+                                break;
+                            case "CategoriesID":
+                                model.Attributes[index].CategoriesID = int.Parse(value);
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return Json(model);
+        }
+
+
+
     }
 }

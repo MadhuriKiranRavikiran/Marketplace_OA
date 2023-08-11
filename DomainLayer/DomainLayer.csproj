@@ -64,6 +64,8 @@
     <Compile Include="Models\Attributes.cs" />
     <Compile Include="Models\Attribute_Values.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\FilterCriteria.cs" />
+    <Compile Include="Models\FilteredProduct.cs" />
     <Compile Include="Models\MainCategories.cs" />
     <Compile Include="Models\ProductAttributeDetail.cs" />
     <Compile Include="Models\Products.cs" />

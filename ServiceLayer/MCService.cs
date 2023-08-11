@@ -88,6 +88,7 @@ namespace ServiceLayer
                     AttributesID = item.AttributesID,
                     Attribute_Name = item.Attribute_Name,
                     Attribute_Value = item.Attribute_Value,
+                    Image_URL = item.Image_URL
 
                 });
             }
@@ -124,6 +125,8 @@ namespace ServiceLayer
 
         //    return (IEnumerable<Products>)mapper.Map<List<ProductsDTO>>(products);
         //}
+
+
 
     }
 
