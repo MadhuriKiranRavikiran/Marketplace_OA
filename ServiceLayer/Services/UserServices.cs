@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+
 
 namespace ServiceLayer.Services
 {
@@ -69,5 +71,22 @@ namespace ServiceLayer.Services
 
             return user;
         }
+
+        public bool VerifyUserPassword(string usernameOrEmail, string providedPassword)
+        {
+            var user = usersRepo.GetByUserNameOrEmail(usernameOrEmail);
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            return VerifyPassword(providedPassword, user.Password);
+        }
+
+        private bool VerifyPassword(string enteredPassword, string storedPassword)
+        {
+            return enteredPassword == storedPassword;
+        }
+
     }
 }

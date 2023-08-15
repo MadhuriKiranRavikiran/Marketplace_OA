@@ -27,6 +27,8 @@ namespace ServiceLayer
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Product_Attributes, Product_AttributesDTO>();
+                cfg.CreateMap<Attributes, AttributesDTO>();
+
 
             });
             mapper = new Mapper(config);
@@ -51,11 +53,34 @@ namespace ServiceLayer
                 Attribute_Value_ID = productAttribute.Discrete_Attribute_Value_ID,
                 Attribute_Value = productAttribute.Attribute_Values.Attribute_Value,
                 Value_Type = productAttribute.Attributes.Value_Type
+
+                //Product_Name = productAttribute.Products.Product_Name,
+                //Description = productAttribute.Products.Description,
+                //Image_URL = productAttribute.Products.Image_URL
             });
 
             return productDetail;
 
 
         }
+
+        public List<Product_AttributesDTO> GetAllProductAttributes() // Updated return type
+        {
+            IEnumerable<Product_Attributes> allProductAttributes = _unitOfWork.ProductAttributesRepo.GetAll();
+            List<Product_AttributesDTO> productAttributesDTOList = allProductAttributes
+                .Select(productAttribute => new Product_AttributesDTO
+                {
+                    ProductsID = productAttribute.ProductsID,
+                    AttributesID = productAttribute.AttributesID,
+                    Attribute_Name = productAttribute.Attributes.Attribute_Name,
+                    Attribute_Value_ID = productAttribute.Discrete_Attribute_Value_ID,
+                    Attribute_Value = productAttribute.Attribute_Values.Attribute_Value,
+                    Value_Type = productAttribute.Attributes.Value_Type
+                })
+                .ToList();
+
+            return productAttributesDTOList;
+        }
+
     }
 }

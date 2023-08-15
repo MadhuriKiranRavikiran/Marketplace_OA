@@ -8,9 +8,8 @@ namespace ServiceLayer.Models
 {
     public class MainCategoriesDTO
     {
-        public int Main_Category_ID { get; set; }
+        public int MainCategoriesID { get; set; }
         public string Main_Category_Name { get; set; }
 
-        public virtual ICollection<CategoriesDTO> Categories { get; set; }
     }
 }

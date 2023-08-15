@@ -28,8 +28,11 @@
                         min_value = c.Double(),
                         max_value = c.Double(),
                         Value_Type = c.String(),
+                        CategoriesID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.AttributesID);
+                .PrimaryKey(t => t.AttributesID)
+                .ForeignKey("dbo.Categories", t => t.CategoriesID, cascadeDelete: true)
+                .Index(t => t.CategoriesID);
             
             CreateTable(
                 "dbo.Categories",
@@ -96,19 +99,6 @@
                     })
                 .PrimaryKey(t => t.UsersID);
             
-            CreateTable(
-                "dbo.CategoriesAttributes",
-                c => new
-                    {
-                        Categories_CategoriesID = c.Int(nullable: false),
-                        Attributes_AttributesID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Categories_CategoriesID, t.Attributes_AttributesID })
-                .ForeignKey("dbo.Categories", t => t.Categories_CategoriesID, cascadeDelete: true)
-                .ForeignKey("dbo.Attributes", t => t.Attributes_AttributesID, cascadeDelete: true)
-                .Index(t => t.Categories_CategoriesID)
-                .Index(t => t.Attributes_AttributesID);
-            
         }
         
         public override void Down()
@@ -118,18 +108,15 @@
             DropForeignKey("dbo.Product_Attributes", "Discrete_Attribute_Value_ID", "dbo.Attribute_Values");
             DropForeignKey("dbo.Products", "CategoriesID", "dbo.Categories");
             DropForeignKey("dbo.Categories", "MainCategoriesID", "dbo.MainCategories");
-            DropForeignKey("dbo.CategoriesAttributes", "Attributes_AttributesID", "dbo.Attributes");
-            DropForeignKey("dbo.CategoriesAttributes", "Categories_CategoriesID", "dbo.Categories");
+            DropForeignKey("dbo.Attributes", "CategoriesID", "dbo.Categories");
             DropForeignKey("dbo.Attribute_Values", "AttributesID", "dbo.Attributes");
-            DropIndex("dbo.CategoriesAttributes", new[] { "Attributes_AttributesID" });
-            DropIndex("dbo.CategoriesAttributes", new[] { "Categories_CategoriesID" });
             DropIndex("dbo.Product_Attributes", new[] { "Discrete_Attribute_Value_ID" });
             DropIndex("dbo.Product_Attributes", new[] { "AttributesID" });
             DropIndex("dbo.Product_Attributes", new[] { "ProductsID" });
             DropIndex("dbo.Products", new[] { "CategoriesID" });
             DropIndex("dbo.Categories", new[] { "MainCategoriesID" });
+            DropIndex("dbo.Attributes", new[] { "CategoriesID" });
             DropIndex("dbo.Attribute_Values", new[] { "AttributesID" });
-            DropTable("dbo.CategoriesAttributes");
             DropTable("dbo.Users");
             DropTable("dbo.Product_Attributes");
             DropTable("dbo.Products");

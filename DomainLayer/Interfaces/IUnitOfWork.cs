@@ -16,7 +16,7 @@ namespace DomainLayer.Interfaces
         IAttributesValuesRepo AttributesValueRepo { get; }
         IProductAttributesRepo ProductAttributesRepo { get; }
         IMainCategoriesRepo MainCategoriesRepo { get; }
-
+        IProductsAttributesRepo2 ProductsAttributesRepo { get; }
 
         int Save();
     }

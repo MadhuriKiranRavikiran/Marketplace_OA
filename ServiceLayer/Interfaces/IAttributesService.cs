@@ -14,7 +14,9 @@ namespace ServiceLayer.Interfaces
 
     public interface IAttributesService 
     {
-        IEnumerable<AttributesDTO> GetAttributes();
+        //IEnumerable<AttributesDTO> GetAttributes();
+        IEnumerable<AttributesDTO> GetAttribute(int CategoriesID);
+
     }
 
 }

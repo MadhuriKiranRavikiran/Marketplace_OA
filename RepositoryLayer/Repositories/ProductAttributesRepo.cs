@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Models;
 using DomainLayer.Interfaces;
+using System.Collections;
 
 namespace RepositoryLayer
 {
@@ -21,6 +22,7 @@ namespace RepositoryLayer
             return Context.Set<Product_Attributes>()
             .Include("Attributes")
             .Include("Attribute_Values")
+            .Include("Products")
             .Where(p => p.ProductsID == id).ToList();
         }
     }

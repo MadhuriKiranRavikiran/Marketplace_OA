@@ -49,7 +49,7 @@
         }
 
         .company-name {
-            font-size: 120px;
+            font-size: 130px;
             color: #191970;
             font-weight: bold;
             margin: 0;
@@ -59,6 +59,7 @@
         }
 
         .slogan {
+            font-size: 20px;
             color: #000000;
             margin-top: 0px;
             margin-bottom: 1px;
@@ -81,28 +82,42 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            margin-bottom: 2px;
+            margin-bottom: 10px;
+            position: relative;
         }
 
-            .input-group label {
-                font-weight: bold;
-                display: none;
-                text-align: right;
-            }
-
             .input-group input {
-                padding: 7px 10px;
+                padding: 5px 40px 5px 10px; /* Adjust padding to make space for the icon on the right */
                 border: 1px solid #ccc;
                 background-color: #f0f0f0;
-                width: 100%;
+                border-radius: 5px;
+                font-size: 16px;
+                width: 300px;
                 margin-top: 5px;
                 transition: background-color 0.3s ease;
                 text-align: center;
             }
 
+            .input-group i {
+                position: absolute;
+                top: 50%;
+                right: 10px; /* Align icon to the right side */
+                transform: translateY(-50%);
+                color: black; /* Set icon color to black */
+                font-size: 18px;
+            }
+
+        .input-group label {
+            font-weight: bold;
+            display: none;
+            text-align: right;
+        }
+
+
                 .input-group input:hover {
                     background-color: #e0e0e0;
                 }
+
 
         .login-btn {
             padding: 10px 20px;
@@ -157,27 +172,28 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 20px;
+            padding: 0;
             border: none;
-            width: 80%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 630px;
+            max-height: 530px;
             display: flex;
             justify-content: center;
             align-items: center;
             background: white;
             box-shadow: none;
-            border-radius: 0;
+            border-radius: 5px;
         }
 
 
         .square-card-container {
             width: 100%;
-            height: 50%;
+            height: 60%;
             max-width: 600px;
             margin: 10px auto;
             position: relative;
-            border-radius: 0%;
-            box-shadow: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0);
             overflow: hidden;
             background: transparent;
         }
@@ -243,7 +259,17 @@
 
         .form-group {
             margin-bottom: 5px;
-            text-align: center;
+            text-align: left;
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="email"],
+        .form-field input[type="password"] {
+            width: 30%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 12px;
         }
 
         .btn-signup {
@@ -274,6 +300,7 @@
             display: inline-block;
             margin-right: 5px;
             width: 150px;
+            font-size: 14px;
         }
 
         .form-field {
@@ -350,8 +377,21 @@
             display: block;
             margin: 0 auto;
         }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: block;
+            text-align: center; 
+            margin-top: 100px; 
+            position: absolute;
+        }
+
     </style>
     @{Layout = null;}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <div id="signupModal" class="modal">
@@ -452,26 +492,40 @@
             </h1>
         </div>
         <br /><p class="slogan">Building Product Selection Platform</p>
-        <div class="login-form">
-            <form method="post" action="@Url.Action("Login", "Account")">
-                <div class="input-group">
-                    <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" required />
-                </div>
-                <div class="input-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required />
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-            </form>
-        </div>
+              <div class="login-form">
+                  @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                  {
+                      <div class="error-message">@ViewBag.ErrorMessage</div>
+                  }
+                  <form id="loginForm" method="post" action="@Url.Action("Login", "Account")">
+                      <div id="loginFields">
+                          <div class="input-group">
+                              <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" required />
+                              <i class="fa fa-user icon"></i>
+                          </div>
+                          <div class="input-group">
+                              <input type="password" id="password" name="password" placeholder="Password" required />
+                              <i class="fa fa-lock icon"></i>
+                          </div>
+                      </div>
+                      <div id="errorMessage" class="error-message"></div>
+
+                      <button type="submit" class="login-btn">Login</button>
+                  </form>
+              </div>
     </div>
 
     <script>
         function openSignupModal() {
+            // Hide the login fields
+            document.getElementById("loginFields").style.display = "none";
             // Show the signup modal
             document.getElementById("signupModal").style.display = "block";
         }
 
         function closeSignupModal() {
+            // Show the login fields
+            document.getElementById("loginFields").style.display = "block";
             // Hide the signup modal
             document.getElementById("signupModal").style.display = "none";
         }
@@ -500,6 +554,23 @@
             reader.readAsDataURL(image);
             document.getElementById('preview').style.maxWidth = '100px';
             document.getElementById('preview').style.maxHeight = '100px';
+        }
+        function showPasswordError() {
+            document.getElementById('passwordError').style.display = 'block';
+        }
+        function showPasswordError() {
+            var errorMessageElement = document.getElementById('errorMessage');
+            errorMessageElement.style.marginTop = '5px'; 
+            errorMessageElement.style.display = 'block';
+        }
+        function validatePassword() {
+            var password = document.getElementById('password').value;
+            if (password != u.Password) { 
+                showPasswordError(); 
+                openInvalidPasswordModal(); 
+                return false; 
+            }
+            return true; 
         }
     </script>
 

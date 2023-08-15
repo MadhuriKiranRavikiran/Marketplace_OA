@@ -17,13 +17,13 @@ namespace Marketplace_OA.Controllers
     {
         private readonly IUsersService usersService;
 
-        public AccountController(IUsersService usersService)
+        public AccountController(IUsersService usersService)  //constructor to accept an instance of IUsersService
         {
             this.usersService = usersService;
         }
         public AccountController()
         {
-            var context = new MarketDBContext(); // Create an instance of your database context
+            var context = new MarketDBContext(); // Create an instance of database context
             var usersRepo = new UsersRepo(context);
             usersService = new UsersService(usersRepo);
         }
@@ -54,6 +54,22 @@ namespace Marketplace_OA.Controllers
 
             // Return to the login page
             return View("Login");
+        }
+
+        [HttpPost]
+        public ActionResult Login(string usernameOrEmail, string password)
+        {
+            bool isAuthenticated = usersService.VerifyUserPassword(usernameOrEmail, password);
+            if (isAuthenticated)
+            {
+                // User is authenticated, redirect to search page
+                return RedirectToAction("Search", "Product");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Invalid username/email or password."; 
+                return View();
+            }
         }
 
     }

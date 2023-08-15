@@ -13,6 +13,9 @@ namespace ServiceLayer.Interfaces
         void RegisterUser(UsersDTO userDto);
         //void AddUser(UsersDTO userDto);
 
+        bool VerifyUserPassword(string usernameOrEmail, string providedPassword); 
+
+
 
     }
 }

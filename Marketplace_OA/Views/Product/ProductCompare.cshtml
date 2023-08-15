@@ -1,0 +1,58 @@
+﻿@model List<List<Marketplace_OA.Models.ProductAttributeDetailVM>>
+
+@{
+    ViewBag.Title = "Product Compare";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+}
+
+@Html.Partial("_ProductPartialView")
+
+<h6>@ViewBag.mainCategory > @ViewBag.subCategory > @ViewBag.Title</h6>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th> <!-- Empty header cell for product images -->
+                @foreach (var productDetailList in Model)
+                {
+                    if (productDetailList.Any())
+                    {
+                        var productName = productDetailList.First().Product_Name;
+                        <th>@productName</th>
+                    }
+                    else
+                    {
+                        <th>No Product Name</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                <tr>
+                    <th>Image</th> <!-- Header cell for product images -->
+                    @foreach (var productDetailList in Model)
+                    {
+                        var productImage = productDetailList.First().Image_URL; // Assuming the image file name
+                        var imageUrl = Url.Content("~/Images/" + productImage);
+                        <td><img src="@imageUrl" alt="Product Image" width="150" height="150" /></td>
+                    }
+                </tr>
+                foreach (var attribute in Model.First())
+                {
+                    <tr>
+                        <th>@attribute.Attribute_Name</th>
+                        @foreach (var productDetailList in Model)
+                        {
+                            var attributeValue = productDetailList.FirstOrDefault(p => p.AttributesID == attribute.AttributesID)?.Attribute_Value;
+                            <td>@attributeValue</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

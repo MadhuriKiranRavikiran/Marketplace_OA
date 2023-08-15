@@ -54,23 +54,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributesService.cs" />
+    <Compile Include="Filters.cs" />
     <Compile Include="Interfaces\IAttributesService.cs" />
     <Compile Include="Interfaces\IAttributeValuesService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />
     <Compile Include="Interfaces\IMainCategoriesService.cs" />
     <Compile Include="Interfaces\IProductAttributesService.cs" />
+    <Compile Include="Interfaces\IProductGetAttributeService.cs" />
     <Compile Include="Interfaces\IProductsService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Models\AttributesDTO.cs" />
     <Compile Include="Models\Attribute_ValuesDTO.cs" />
     <Compile Include="Models\CategoriesDTO.cs" />
     <Compile Include="Models\MainCategoriesDTO.cs" />
+    <Compile Include="Models\ProductAttributeDetailDTO.cs" />
     <Compile Include="Models\ProductsDTO.cs" />
     <Compile Include="Models\Product_AttributesDTO.cs" />
     <Compile Include="Models\UsersDTO.cs" />
     <Compile Include="MCService.cs" />
     <Compile Include="ProductAttributesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\UserServices.cs" />
   </ItemGroup>
   <ItemGroup>

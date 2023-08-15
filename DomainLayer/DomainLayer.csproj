@@ -57,13 +57,17 @@
     <Compile Include="Interfaces\IGenericRepo.cs" />
     <Compile Include="Interfaces\IMainCategoriesRepo.cs" />
     <Compile Include="Interfaces\IProductAttributesRepo.cs" />
+    <Compile Include="Interfaces\IProductsAttributesRepo2.cs" />
     <Compile Include="Interfaces\IProductsRepo.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUsersRepo.cs" />
     <Compile Include="Models\Attributes.cs" />
     <Compile Include="Models\Attribute_Values.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\FilterCriteria.cs" />
+    <Compile Include="Models\FilteredProduct.cs" />
     <Compile Include="Models\MainCategories.cs" />
+    <Compile Include="Models\ProductAttributeDetail.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Product_Attributes.cs" />
     <Compile Include="Models\Users.cs" />

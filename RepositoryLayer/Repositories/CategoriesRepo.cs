@@ -14,7 +14,12 @@ namespace RepositoryLayer
         public CategoriesRepo(MarketDBContext context) : base(context)
         {
         }
+        public IEnumerable<Categories> GetCategoryById(int MainCategoryId)
+        {
 
+            var MainCategory = Context.Set<Categories>().Where(category => category.MainCategoriesID == MainCategoryId);
+            return MainCategory;
+        }
 
     }
 
